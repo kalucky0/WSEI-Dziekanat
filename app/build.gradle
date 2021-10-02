@@ -44,7 +44,6 @@ dependencies {
 
     implementation 'com.mikepenz:aboutlibraries-core:8.9.2'
     implementation 'com.mikepenz:aboutlibraries:8.9.2'
-    implementation 'com.mikepenz:fastadapter:5.5.1'
     implementation 'com.mikepenz:community-material-typeface:5.8.55.0-kotlin@aar'
     implementation 'com.mikepenz:materialdrawer-iconics:8.4.4'
     implementation 'com.mikepenz:materialdrawer-iconics:8.4.4'

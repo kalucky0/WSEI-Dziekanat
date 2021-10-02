@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable-night/schedule_item_bg.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable/cap.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23541666666666666" />
-        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable/schedule_item.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/fragment_collection_object.xml" value="0.3875" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/fragment_schedule.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/fragment_schedule_day.xml" value="0.3021933387489846" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/item_schedule.xml" value="0.3875" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/item_schedule_hour.xml" value="0.3875" />
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/main_fragment.xml" value="0.3875" />
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/schedule_activity.xml" value="0.3875" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/schedule_fragment.xml" value="0.3875" />
       </map>
     </option>
   </component>

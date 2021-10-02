@@ -23,4 +23,8 @@
     <style name="Theme.WSEIDziekanat.DrawerStyle" parent="Widget.MaterialDrawerStyle">
         <item name="materialDrawerDividerColor">@color/black_10</item>
     </style>
+
+    <style name="Theme.WSEIDziekanat.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

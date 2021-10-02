@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WSEI Dziekanat</string>
+    <string name="schedule">Plany zajęć</string>
+    <string name="finances">Finanse</string>
+    <string name="announcements">Ogłoszenia</string>
+    <string name="your_data">Twoje dane</string>
+    <string name="settings">Ustawienia</string>
 </resources>

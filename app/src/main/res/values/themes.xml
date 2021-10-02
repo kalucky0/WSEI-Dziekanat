@@ -1,11 +1,26 @@
 <resources>
-    <style name="Theme.WSEIDziekanat" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <style name="Theme.WSEIDziekanat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/green_500</item>
         <item name="colorPrimaryVariant">@color/green_700</item>
+        <item name="colorPrimaryDark">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/amber_200</item>
         <item name="colorSecondaryVariant">@color/amber_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+        <item name="materialDrawerStyle">@style/Theme.WSEIDziekanat.DrawerStyle</item>
+        <item name="materialDrawerHeaderStyle">@style/Theme.WSEIDziekanat.DrawerHeaderStyle</item>
+    </style>
+
+    <style name="Theme.WSEIDziekanat.DrawerHeaderStyle" parent="Widget.MaterialDrawerHeaderStyle">
+        <item name="materialDrawerHeaderSelectionText">@color/white</item>
+        <item name="materialDrawerHeaderSelectionSubtext">@color/white_80</item>
+    </style>
+
+    <style name="Theme.WSEIDziekanat.DrawerStyle" parent="Widget.MaterialDrawerStyle">
+        <item name="materialDrawerDividerColor">@color/black_10</item>
     </style>
 </resources>

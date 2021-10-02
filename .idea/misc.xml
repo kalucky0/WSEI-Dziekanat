@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable/cap.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/main_fragment.xml" value="0.3875" />
+        <entry key="..\:/Users/Maciek/AndroidStudioProjects/WSEIDziekanat/app/src/main/res/layout/schedule_activity.xml" value="0.3875" />
       </map>
     </option>
   </component>

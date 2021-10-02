@@ -1,11 +1,87 @@
 package dev.kalucky0.wsei
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial
+import com.mikepenz.materialdrawer.iconics.iconicsIcon
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.descriptionText
+import com.mikepenz.materialdrawer.model.interfaces.iconUrl
+import com.mikepenz.materialdrawer.model.interfaces.nameRes
+import com.mikepenz.materialdrawer.model.interfaces.nameText
+import com.mikepenz.materialdrawer.util.DrawerImageLoader
+import com.mikepenz.materialdrawer.widget.AccountHeaderView
+import dev.kalucky0.wsei.databinding.ActivityMainBinding
+import dev.kalucky0.wsei.ui.main.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, ScheduleFragment.newInstance())
+                .commitNow()
+        }
+
+        DrawerImageLoader.init(DrawerImgLoader(this, "xxxxxxxxxxxx"));
+
+        binding.slider.itemAdapter.add(
+            PrimaryDrawerItem().apply {
+                nameRes = R.string.schedule
+                iconicsIcon = CommunityMaterial.Icon3.cmd_timetable
+                isSelected = true
+                identifier = 1
+            },
+            PrimaryDrawerItem().apply {
+                nameRes = R.string.finances
+                iconicsIcon = CommunityMaterial.Icon.cmd_currency_usd
+                identifier = 2
+            },
+            PrimaryDrawerItem().apply {
+                nameRes = R.string.announcements
+                iconicsIcon = CommunityMaterial.Icon3.cmd_message_text_outline
+                identifier = 3
+            },
+            DividerDrawerItem(),
+            PrimaryDrawerItem().apply {
+                nameRes = R.string.your_data
+                iconicsIcon = CommunityMaterial.Icon.cmd_account_outline
+                identifier = 4
+            },
+            PrimaryDrawerItem().apply {
+                nameRes = R.string.settings
+                iconicsIcon = CommunityMaterial.Icon.cmd_cog
+                identifier = 5
+            },
+        )
+
+        binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
+            false
+        }
+
+        val headerView = AccountHeaderView(this).apply {
+            attachToSliderView(binding.slider)
+            accountHeaderBackground.setImageResource(R.drawable.header_background)
+            addProfiles(
+                ProfileDrawerItem().apply {
+                    nameText = "Jan Kowalski";
+                    descriptionText = "email@example.com";
+                    iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1";
+                    identifier = 102
+                }
+            )
+            onAccountHeaderListener = { view, profile, current ->
+                false
+            }
+            withSavedInstance(savedInstanceState)
+        }
     }
 }

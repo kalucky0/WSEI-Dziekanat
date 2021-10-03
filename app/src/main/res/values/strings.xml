@@ -5,4 +5,7 @@
     <string name="announcements">Ogłoszenia</string>
     <string name="your_data">Twoje dane</string>
     <string name="settings">Ustawienia</string>
+    <string name="password">Hasło</string>
+    <string name="login">Login</string>
+    <string name="login_error">Wystąpił błąd podczas próby logowania!</string>
 </resources>

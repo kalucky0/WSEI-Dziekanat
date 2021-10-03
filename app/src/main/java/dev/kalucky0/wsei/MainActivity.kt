@@ -14,7 +14,7 @@ import com.mikepenz.materialdrawer.model.interfaces.*
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
-import dev.kalucky0.wsei.ui.main.ScheduleFragment
+import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
 

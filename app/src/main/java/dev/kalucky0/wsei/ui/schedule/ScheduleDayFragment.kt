@@ -1,4 +1,4 @@
-package dev.kalucky0.wsei.ui.main
+package dev.kalucky0.wsei.ui.schedule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,7 +39,7 @@ class ScheduleDayFragment : Fragment() {
 
             val activities: ArrayList<Activity> = ArrayList()
 
-            activities.add(Activity(6.5f, 8f, "Statystyka opisowa", "Jan Kowalski", "Wyk", "F Praga"));
+            activities.add(Activity(6.5f, 8f, "Statystyka opisowa", "Jan Kowalski", "Wyk", "F Praga"))
 
             val activitiesView: RecyclerView = view.findViewById(R.id.activities)
             activitiesView.layoutManager = LinearLayoutManager(context)

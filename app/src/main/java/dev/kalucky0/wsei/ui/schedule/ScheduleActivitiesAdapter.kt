@@ -1,4 +1,4 @@
-package dev.kalucky0.wsei.ui.main
+package dev.kalucky0.wsei.ui.schedule
 
 import android.view.LayoutInflater
 import android.view.View

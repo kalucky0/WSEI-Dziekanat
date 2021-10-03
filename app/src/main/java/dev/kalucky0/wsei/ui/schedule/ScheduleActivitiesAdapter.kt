@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dev.kalucky0.wsei.models.Activity
+import dev.kalucky0.wsei.data.models.Activity
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 

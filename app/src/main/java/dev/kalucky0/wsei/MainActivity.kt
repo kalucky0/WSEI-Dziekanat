@@ -13,8 +13,10 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.*
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
+import dev.kalucky0.wsei.data.web.StudentData
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
 import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
+import okhttp3.internal.Util
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +33,13 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, binding.root, binding.toolbar, com.mikepenz.materialdrawer.R.string.material_drawer_open, com.mikepenz.materialdrawer.R.string.material_drawer_close)
+        actionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.root,
+            binding.toolbar,
+            com.mikepenz.materialdrawer.R.string.material_drawer_open,
+            com.mikepenz.materialdrawer.R.string.material_drawer_close
+        )
         binding.root.addDrawerListener(actionBarDrawerToggle)
 
         if (savedInstanceState == null) {
@@ -76,21 +84,26 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        AccountHeaderView(this).apply {
-            attachToSliderView(binding.slider)
-            accountHeaderBackground.setImageResource(R.drawable.header_background)
-            addProfiles(
-                ProfileDrawerItem().apply {
-                    nameText = "Jan Kowalski"
-                    descriptionText = "email@example.com"
-                    iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
-                    identifier = 102
+        StudentData {
+            Utils.student = it;
+            runOnUiThread {
+                AccountHeaderView(this).apply {
+                    attachToSliderView(binding.slider)
+                    accountHeaderBackground.setImageResource(R.drawable.header_background)
+                    addProfiles(
+                        ProfileDrawerItem().apply {
+                            nameText = it.name + " " + it.surname
+                            descriptionText = it.email
+                            iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
+                            identifier = 102
+                        }
+                    )
+                    onAccountHeaderListener = { view, profile, current ->
+                        false
+                    }
+                    withSavedInstance(savedInstanceState)
                 }
-            )
-            onAccountHeaderListener = { view, profile, current ->
-                false
             }
-            withSavedInstance(savedInstanceState)
         }
     }
 

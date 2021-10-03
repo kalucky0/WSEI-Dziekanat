@@ -1,5 +1,6 @@
 package dev.kalucky0.wsei
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -87,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         StudentData {
             Utils.student = it;
             runOnUiThread {
+                binding.subtitle.text = it.name + " " + it.surname
                 AccountHeaderView(this).apply {
                     attachToSliderView(binding.slider)
                     accountHeaderBackground.setImageResource(R.drawable.header_background)

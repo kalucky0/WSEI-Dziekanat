@@ -37,7 +37,7 @@
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jan Kowalski"
+                    tools:text="Jan Kowalski"
                     android:textSize="13sp" />
 
             </LinearLayout>

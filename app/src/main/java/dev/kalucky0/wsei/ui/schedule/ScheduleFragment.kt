@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import dev.kalucky0.wsei.R
+import dev.kalucky0.wsei.Utils
+import dev.kalucky0.wsei.data.web.ScheduleData
 
 class ScheduleFragment : Fragment() {
 
@@ -27,10 +29,15 @@ class ScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager)
-        viewPager = view.findViewById(R.id.schedule)
-        viewPager.adapter = schedulePagerAdapter
-        val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
-        tabLayout.setupWithViewPager(viewPager)
+        ScheduleData {
+            Utils.schedule = it
+            activity?.runOnUiThread {
+                schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager)
+                viewPager = view.findViewById(R.id.schedule)
+                viewPager.adapter = schedulePagerAdapter
+                val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
+                tabLayout.setupWithViewPager(viewPager)
+            }
+        }
     }
 }

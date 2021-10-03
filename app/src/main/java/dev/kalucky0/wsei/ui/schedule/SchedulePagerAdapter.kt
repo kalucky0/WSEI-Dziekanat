@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 class SchedulePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val days: Array<String> = arrayOf("Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela")
-    override fun getCount(): Int = 5
+    override fun getCount(): Int = 7
 
     override fun getItem(i: Int): Fragment {
         val fragment = ScheduleDayFragment()

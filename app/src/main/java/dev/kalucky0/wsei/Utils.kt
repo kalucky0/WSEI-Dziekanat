@@ -4,7 +4,7 @@ import android.content.Context
 
 class Utils {
     companion object {
-        var sessionId: String = "";
+        var sessionId: String = ""
 
         fun toPixels(dp: Float, context: Context?): Int {
             val scale: Float = context!!.resources.displayMetrics.density

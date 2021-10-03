@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
 
-        DrawerImageLoader.init(DrawerImgLoader(this, "xxxxxxxxxxxx"));
+        DrawerImageLoader.init(DrawerImgLoader(this))
 
         binding.slider.itemAdapter.add(
             PrimaryDrawerItem().apply {
@@ -76,14 +76,14 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        val headerView = AccountHeaderView(this).apply {
+        AccountHeaderView(this).apply {
             attachToSliderView(binding.slider)
             accountHeaderBackground.setImageResource(R.drawable.header_background)
             addProfiles(
                 ProfileDrawerItem().apply {
-                    nameText = "Jan Kowalski";
-                    descriptionText = "email@example.com";
-                    iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1";
+                    nameText = "Jan Kowalski"
+                    descriptionText = "email@example.com"
+                    iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
                     identifier = 102
                 }
             )

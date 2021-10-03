@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import dev.kalucky0.wsei.models.Activity
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 
@@ -38,11 +39,11 @@ class ScheduleActivitiesAdapter(private val data: ArrayList<Activity>) :
         )
 
         params.topMargin =
-            (Utils.toPixels(78f, viewHolder.activity.context) * if(i == 0) data[i].timeFrom else data[i].timeFrom - data[i - 1].timeTo).toInt();
+            (Utils.toPixels(78f, viewHolder.activity.context) * if(i == 0) data[i].timeFrom else data[i].timeFrom - data[i - 1].timeTo).toInt()
         params.height = (Utils.toPixels(
             78f,
             viewHolder.activity.context
-        ) * (data[i].timeTo - data[i].timeFrom)).toInt();
+        ) * (data[i].timeTo - data[i].timeFrom)).toInt()
         viewHolder.activity.layoutParams = params
     }
 

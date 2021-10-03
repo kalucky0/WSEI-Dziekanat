@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.kalucky0.wsei.models.Activity
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 

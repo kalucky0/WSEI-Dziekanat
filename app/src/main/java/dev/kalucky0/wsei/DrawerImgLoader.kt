@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-class DrawerImgLoader(private val context: Context, private val sessionId: String) :
+class DrawerImgLoader(private val context: Context) :
     AbstractDrawerImageLoader() {
     override fun set(imageView: ImageView, uri: Uri, placeholder: Drawable, tag: String?) {
         if (tag == DrawerImageLoader.Tags.PROFILE.name || tag == DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name) {
@@ -22,7 +22,7 @@ class DrawerImgLoader(private val context: Context, private val sessionId: Strin
                         "User-Agent",
                         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                     )
-                    .header("Cookie", "ASP.NET_SessionId=$sessionId")
+                    .header("Cookie", "ASP.NET_SessionId=${Utils.sessionId}")
                     .method(original.method(), original.body())
                     .build()
                 chain.proceed(request)
@@ -33,7 +33,7 @@ class DrawerImgLoader(private val context: Context, private val sessionId: Strin
                 .build()
 
             picasso.load(uri).placeholder(placeholder).into(imageView)
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP;
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         } else {
             Picasso.get().load(uri).placeholder(placeholder).into(imageView)
         }

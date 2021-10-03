@@ -1,4 +1,4 @@
-package dev.kalucky0.wsei.ui.login
+package dev.kalucky0.wsei
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import dev.kalucky0.wsei.MainActivity
-import dev.kalucky0.wsei.R
-import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.databinding.ActivityLoginBinding
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -31,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         if (Utils.sessionId != "") {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
+            return
         }
 
         var formFields: List<String> = List(0) { "" }

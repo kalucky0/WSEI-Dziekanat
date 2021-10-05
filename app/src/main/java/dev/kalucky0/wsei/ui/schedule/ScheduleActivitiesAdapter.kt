@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dev.kalucky0.wsei.data.models.Activity
+import dev.kalucky0.wsei.data.models.Schedule
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 import kotlin.math.floor
 
-class ScheduleActivitiesAdapter(private val data: ArrayList<Activity>, private val startHour: Int) :
+class ScheduleActivitiesAdapter(private val data: List<Schedule>, private val startHour: Int) :
     RecyclerView.Adapter<ScheduleActivitiesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,7 +35,6 @@ class ScheduleActivitiesAdapter(private val data: ArrayList<Activity>, private v
         viewHolder.time.text = "${parseHour(data[i].timeFrom)} - ${parseHour(data[i].timeTo)}"
         viewHolder.info.text = "${data[i].instructor} • ${data[i].location}"
 
-
         val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -53,7 +52,7 @@ class ScheduleActivitiesAdapter(private val data: ArrayList<Activity>, private v
     private fun parseHour(time: Float): String {
         val hour: Int = floor(time).toInt()
         val minutes: Int = (60 * (time - hour)).toInt()
-        return "$hour:${minutes.toString().padStart(2, '0')}";
+        return "$hour:${minutes.toString().padStart(2, '0')}"
     }
 
     override fun getItemCount() = data.size

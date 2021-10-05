@@ -24,6 +24,7 @@ class StudentData(val callback: (Student) -> Unit) {
 
             callback(
                 Student(
+                    0,
                     sensitiveData[1].`val`(),
                     sensitiveData[0].`val`(),
                     sensitiveData[2].`val`(),
@@ -38,7 +39,6 @@ class StudentData(val callback: (Student) -> Unit) {
                     sensitiveAddress[4].text()
                 )
             )
-            Log.e("StudentData", Utils.student.toString())
         }.start()
     }
 }

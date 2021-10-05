@@ -6,27 +6,33 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial
 import com.mikepenz.materialdrawer.iconics.iconicsIcon
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
-import com.mikepenz.materialdrawer.model.interfaces.*
+import com.mikepenz.materialdrawer.model.interfaces.descriptionText
+import com.mikepenz.materialdrawer.model.interfaces.iconUrl
+import com.mikepenz.materialdrawer.model.interfaces.nameRes
+import com.mikepenz.materialdrawer.model.interfaces.nameText
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
-import dev.kalucky0.wsei.data.web.StudentData
+import dev.kalucky0.wsei.data.AppDatabase
+import dev.kalucky0.wsei.data.models.Student
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
 import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
-import okhttp3.internal.Util
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var student: Student
+    private lateinit var accountHeader: AccountHeaderView
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+//        UpdateChecker.checkForUpdate(binding.root, this)
         actionBarDrawerToggle = ActionBarDrawerToggle(
             this,
             binding.root,
@@ -50,6 +57,33 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
 
+        Utils.initHttpClient()
+        setupDrawer(savedInstanceState)
+
+        if (Utils.db == null)
+            Utils.db = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java, "wsei-db"
+            ).build()
+
+        Thread {
+            student = Utils.db?.studentDao()!!.getAll()[0]
+            runOnUiThread { updateHeader() }
+        }.start()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateHeader() {
+        binding.subtitle.text = "${student.name} ${student.surname}"
+        accountHeader.addProfiles(ProfileDrawerItem().apply {
+            nameText = student.name + " " + student.surname
+            descriptionText = student.email
+            iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
+            identifier = 102
+        })
+    }
+
+    private fun setupDrawer(savedInstanceState: Bundle?) {
         DrawerImageLoader.init(DrawerImgLoader(this))
 
         binding.slider.itemAdapter.add(
@@ -86,27 +120,13 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        StudentData {
-            Utils.student = it;
-            runOnUiThread {
-                binding.subtitle.text = it.name + " " + it.surname
-                AccountHeaderView(this).apply {
-                    attachToSliderView(binding.slider)
-                    accountHeaderBackground.setImageResource(R.drawable.header_background)
-                    addProfiles(
-                        ProfileDrawerItem().apply {
-                            nameText = it.name + " " + it.surname
-                            descriptionText = it.email
-                            iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
-                            identifier = 102
-                        }
-                    )
-                    onAccountHeaderListener = { view, profile, current ->
-                        false
-                    }
-                    withSavedInstance(savedInstanceState)
-                }
+        accountHeader = AccountHeaderView(this).apply {
+            attachToSliderView(binding.slider)
+            accountHeaderBackground.setImageResource(R.drawable.header_background)
+            onAccountHeaderListener = { view, profile, current ->
+                false
             }
+            withSavedInstance(savedInstanceState)
         }
     }
 
@@ -124,5 +144,4 @@ class MainActivity : AppCompatActivity() {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) return true
         return super.onOptionsItemSelected(item)
     }
-
 }

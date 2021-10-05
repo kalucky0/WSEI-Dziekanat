@@ -9,7 +9,8 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
-import dev.kalucky0.wsei.data.web.ScheduleData
+import dev.kalucky0.wsei.data.models.Schedule
+import kotlinx.datetime.LocalDate
 
 class ScheduleFragment : Fragment() {
 
@@ -29,15 +30,14 @@ class ScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        ScheduleData {
-            Utils.schedule = it
-            activity?.runOnUiThread {
-                schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager)
-                viewPager = view.findViewById(R.id.schedule)
-                viewPager.adapter = schedulePagerAdapter
-                val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
-                tabLayout.setupWithViewPager(viewPager)
-            }
-        }
+        Thread {
+            val days: List<LocalDate> = Utils.db?.scheduleDao()!!.getAllDates()
+            val schedule: List<Schedule> = Utils.db?.scheduleDao()!!.getAll()
+            schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager, days, schedule)
+            viewPager = view.findViewById(R.id.schedule)
+            viewPager.adapter = schedulePagerAdapter
+            val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
+            tabLayout.setupWithViewPager(viewPager)
+        }.start()
     }
 }

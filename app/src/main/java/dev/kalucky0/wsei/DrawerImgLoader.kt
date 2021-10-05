@@ -15,21 +15,8 @@ class DrawerImgLoader(private val context: Context) :
     AbstractDrawerImageLoader() {
     override fun set(imageView: ImageView, uri: Uri, placeholder: Drawable, tag: String?) {
         if (tag == DrawerImageLoader.Tags.PROFILE.name || tag == DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name) {
-            val client = OkHttpClient().newBuilder().addInterceptor { chain ->
-                val original: Request = chain.request()
-                val request: Request = original.newBuilder()
-                    .header(
-                        "User-Agent",
-                        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
-                    )
-                    .header("Cookie", "ASP.NET_SessionId=${Utils.sessionId}")
-                    .method(original.method(), original.body())
-                    .build()
-                chain.proceed(request)
-            }.build()
-
             val picasso = Picasso.Builder(context)
-                .downloader(OkHttp3Downloader(client))
+                .downloader(OkHttp3Downloader(Utils.downloaderClient))
                 .build()
 
             picasso.load(uri).placeholder(placeholder).into(imageView)

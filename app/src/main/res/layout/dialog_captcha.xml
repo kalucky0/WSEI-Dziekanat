@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/dialog_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginVertical="20dp"
+        android:layout_weight="0"
+        android:contentDescription="Captcha"
+        android:scaleType="fitCenter" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:hint="@string/code">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

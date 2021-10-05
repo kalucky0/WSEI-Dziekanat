@@ -11,6 +11,7 @@
         <item name="android:statusBarColor">#00000000</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
 
         <item name="materialDrawerStyle">@style/Theme.WSEIDziekanat.DrawerStyle</item>
         <item name="materialDrawerHeaderStyle">@style/Theme.WSEIDziekanat.DrawerHeaderStyle</item>

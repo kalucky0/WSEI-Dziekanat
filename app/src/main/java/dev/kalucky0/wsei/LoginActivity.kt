@@ -2,11 +2,19 @@ package dev.kalucky0.wsei
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
+import dev.kalucky0.wsei.data.SynchronizeData
+import dev.kalucky0.wsei.data.models.Credentials
 import dev.kalucky0.wsei.databinding.ActivityLoginBinding
+import dev.kalucky0.wsei.databinding.DialogCaptchaBinding
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -16,32 +24,22 @@ import java.net.URLEncoder
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private var binding: ActivityLoginBinding? = null
+    private var captchaCode: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        val sharedPref = getPreferences(Context.MODE_PRIVATE)
-        Utils.sessionId = sharedPref.getString("sessionId", "").toString()
-        if (Utils.sessionId != "") {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            finish()
-            return
-        }
-
-        var formFields: List<String> = List(0) { "" }
+        var formFields: List<String> = ArrayList()
 
         Thread {
             try {
                 val data = getData("https://dziekanat.wsei.edu.pl/Konto/LogowanieStudenta")
 
                 runOnUiThread {
-                    if (data!!.contains("wpisz kod z obrazka")) {
-                        //TODO: Add dialog window for solving captcha
-                        Toast.makeText(applicationContext, "Jest Captcha", Toast.LENGTH_LONG).show()
-                    }
+                    if (data!!.contains("wpisz kod z obrazka")) solveCaptcha()
                 }
                 val regex = Regex(
                     "<tr style=\"(.*?)\">.+?formularz_dane\">\\s+<input.+?name=\"([0-9A-f]+)\".+?type=\"([a-z]+)\"",
@@ -51,19 +49,34 @@ class LoginActivity : AppCompatActivity() {
                 )
                 val matches = data?.let { regex.findAll(it) }
                 formFields = matches?.map { it.groupValues[2] }?.filter { it != "2442" }!!.toList()
-                runOnUiThread { binding.loginButton.isEnabled = true }
+                runOnUiThread { binding?.loginButton!!.isEnabled = true }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         }.start()
 
-        binding.loginButton.setOnClickListener {
-            val login = URLEncoder.encode(binding.loginField.editText?.text.toString(), "utf-8")
-            val password =
-                URLEncoder.encode(binding.passwordField.editText?.text.toString(), "utf-8")
-            Thread {
-                val test = tryLogin("${formFields[0]}=${login}&${formFields[1]}=${password}")
-                if (test!!.contains("/Konto/Zdjecie/")) {
+        val sharedPref = getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
+        binding?.loginButton!!.setOnClickListener { authenticate(sharedPref, formFields) }
+    }
+
+    private fun authenticate(sharedPref: SharedPreferences, formFields: List<String>) {
+        val login = URLEncoder.encode(binding?.loginField!!.editText?.text.toString(), "utf-8")
+        val password =
+            URLEncoder.encode(binding?.passwordField!!.editText?.text.toString(), "utf-8")
+        Thread {
+            val test =
+                if (captchaCode.isEmpty()) tryLogin("${formFields[0]}=${login}&${formFields[1]}=${password}") else tryLogin(
+                    "${formFields[0]}=${login}&${formFields[1]}=${password}&captcha=${captchaCode}"
+                )
+            if (test!!.contains("/Konto/Zdjecie/")) {
+                Utils.db!!.credentialsDao().insertAll(
+                    Credentials(
+                        0,
+                        login,
+                        password
+                    )
+                )
+                SynchronizeData(Utils.sessionId) {
                     with(sharedPref.edit()) {
                         putString("sessionId", Utils.sessionId)
                         apply()
@@ -71,15 +84,34 @@ class LoginActivity : AppCompatActivity() {
 
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     finish()
-                } else {
-                    Snackbar.make(
-                        binding.root,
-                        getString(R.string.login_error),
-                        Snackbar.LENGTH_LONG
-                    ).show()
                 }
-            }.start()
-        }
+            } else {
+                Log.e("", test)
+                Snackbar.make(
+                    binding!!.root,
+                    getString(R.string.login_error),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }.start()
+    }
+
+    private fun solveCaptcha() {
+        Utils.initHttpClient()
+        val dialogBinding: DialogCaptchaBinding =
+            DialogCaptchaBinding.inflate(LayoutInflater.from(this))
+        AlertDialog.Builder(this)
+            .setTitle("Wpisz kod z obrazka")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Ok") { dialog, which ->
+                captchaCode = dialogBinding.passwordField.editText?.text.toString()
+            }.show()
+
+        val picasso = Picasso.Builder(this@LoginActivity)
+            .downloader(OkHttp3Downloader(Utils.downloaderClient))
+            .build()
+        picasso.load("https://dziekanat.wsei.edu.pl/Shared/Captcha?height=80&width=360")
+            .into(dialogBinding.dialogImageview)
     }
 
     @Throws(IOException::class)

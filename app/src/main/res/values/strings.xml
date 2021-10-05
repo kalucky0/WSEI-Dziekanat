@@ -1,12 +1,20 @@
 <resources>
-    <string name="app_name">WSEI Dziekanat</string>
-    <string name="schedule">Plany zajęć</string>
-    <string name="finances">Finanse</string>
     <string name="announcements">Ogłoszenia</string>
-    <string name="your_data">Twoje dane</string>
-    <string name="settings">Ustawienia</string>
-    <string name="password">Hasło</string>
+    <string name="app_name">WSEI Dziekanat</string>
+    <string name="code">Kod</string>
+    <string name="finances">Finanse</string>
     <string name="login">Login</string>
     <string name="login_error">Wystąpił błąd podczas próby logowania!</string>
-    <string name="code">Kod</string>
+    <string name="password">Hasło</string>
+    <string name="schedule">Plan zajęć</string>
+    <string name="settings">Ustawienia</string>
+    <string name="sync_auto">Synchronizuj automatycznie</string>
+    <string name="sync_auto_summary">Automatycznie synchronizuj dane z Wirtualnym Dziekanatem</string>
+    <string name="sync_error">Wystąpił błąd podczas synchronizacji!</string>
+    <string name="sync_header">Synchronizacja</string>
+    <string name="sync_now">Synchronizuj teraz</string>
+    <string name="sync_now_summary">Zaktualizuj dane w aplikacji</string>
+    <string name="sync_success">Pomyślnie zsynchronizowano dane!</string>
+    <string name="your_data">Twoje dane</string>
+    <string name="sync_started">Rozpoczęto synchronizację!</string>
 </resources>

@@ -3,9 +3,11 @@ package dev.kalucky0.wsei
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.room.Room
 import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial
 import com.mikepenz.materialdrawer.iconics.iconicsIcon
@@ -21,6 +23,7 @@ import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.models.Student
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
+import dev.kalucky0.wsei.ui.SettingsFragment
 import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
@@ -51,11 +54,8 @@ class MainActivity : AppCompatActivity() {
         )
         binding.root.addDrawerListener(actionBarDrawerToggle)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ScheduleFragment.newInstance())
-                .commitNow()
-        }
+        if (savedInstanceState == null)
+            replaceFragment(ScheduleFragment.newInstance(), getString(R.string.settings))
 
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)
@@ -117,6 +117,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
+            when (drawerItem.identifier) {
+                1L -> replaceFragment(ScheduleFragment.newInstance(), getString(R.string.schedule))
+                5L -> replaceFragment(SettingsFragment.newInstance(), getString(R.string.settings))
+            }
+
+            Log.e("Test", drawerItem.identifier.toString())
             false
         }
 
@@ -128,6 +134,14 @@ class MainActivity : AppCompatActivity() {
             }
             withSavedInstance(savedInstanceState)
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment, string: String) {
+        binding.title.text = string
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

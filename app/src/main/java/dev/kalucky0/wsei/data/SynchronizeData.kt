@@ -4,7 +4,7 @@ import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.web.ScheduleData
 import dev.kalucky0.wsei.data.web.StudentData
 
-class SynchronizeData(sessionId: String, callback: () -> Unit) {
+class SynchronizeData(callback: () -> Unit) {
     init {
         Thread {
             StudentData { student ->

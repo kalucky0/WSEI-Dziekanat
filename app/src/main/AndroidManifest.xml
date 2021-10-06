@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WSEIDziekanat">
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:fitsSystemWindows="true" />
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LauncherActivity"
             android:exported="true">

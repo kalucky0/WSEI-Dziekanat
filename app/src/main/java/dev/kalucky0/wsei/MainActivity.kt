@@ -3,11 +3,9 @@ package dev.kalucky0.wsei
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
@@ -25,8 +23,6 @@ import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.models.Student
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
-import dev.kalucky0.wsei.ui.SettingsFragment
-import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             Utils.db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "wsei-db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
 
         Thread {
             student = Utils.db?.studentDao()!!.getAll()[0]
@@ -120,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             },
         )
 
-        binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
+        binding.slider.onDrawerItemClickListener = { _, drawerItem, _ ->
             when (drawerItem.identifier) {
                 1L -> replaceFragment(R.id.scheduleFragment, getString(R.string.schedule))
                 5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))

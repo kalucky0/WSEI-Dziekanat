@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
             Utils.db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "wsei-db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
 
         var formFields: List<String> = ArrayList()
 

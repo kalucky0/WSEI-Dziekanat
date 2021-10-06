@@ -13,11 +13,6 @@ import dev.kalucky0.wsei.data.models.Schedule
 import kotlinx.datetime.LocalDate
 
 class ScheduleFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ScheduleFragment()
-    }
-
     private lateinit var schedulePagerAdapter: SchedulePagerAdapter
     private lateinit var viewPager: ViewPager
 
@@ -33,11 +28,14 @@ class ScheduleFragment : Fragment() {
         Thread {
             val days: List<LocalDate> = Utils.db?.scheduleDao()!!.getAllDates()
             val schedule: List<Schedule> = Utils.db?.scheduleDao()!!.getAll()
-            schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager, days, schedule)
-            viewPager = view.findViewById(R.id.schedule)
-            viewPager.adapter = schedulePagerAdapter
-            val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
-            tabLayout.setupWithViewPager(viewPager)
+
+            activity?.runOnUiThread {
+                schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager, days, schedule)
+                viewPager = view.findViewById(R.id.schedule)
+                viewPager.adapter = schedulePagerAdapter
+                val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
+                tabLayout.setupWithViewPager(viewPager)
+            }
         }.start()
     }
 }

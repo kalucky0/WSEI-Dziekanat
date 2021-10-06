@@ -8,6 +8,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
 import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial
 import com.mikepenz.materialdrawer.iconics.iconicsIcon
@@ -28,6 +30,7 @@ import dev.kalucky0.wsei.ui.schedule.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var student: Student
@@ -54,8 +57,9 @@ class MainActivity : AppCompatActivity() {
         )
         binding.root.addDrawerListener(actionBarDrawerToggle)
 
-        if (savedInstanceState == null)
-            replaceFragment(ScheduleFragment.newInstance(), getString(R.string.schedule))
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)
@@ -118,30 +122,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
             when (drawerItem.identifier) {
-                1L -> replaceFragment(ScheduleFragment.newInstance(), getString(R.string.schedule))
-                5L -> replaceFragment(SettingsFragment.newInstance(), getString(R.string.settings))
+                1L -> replaceFragment(R.id.scheduleFragment, getString(R.string.schedule))
+                5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))
             }
-
-            Log.e("Test", drawerItem.identifier.toString())
             false
         }
 
         accountHeader = AccountHeaderView(this).apply {
             attachToSliderView(binding.slider)
             accountHeaderBackground.setImageResource(R.drawable.header_background)
-            onAccountHeaderListener = { view, profile, current ->
-                false
-            }
+            onAccountHeaderListener = { _, _, _ -> false }
             withSavedInstance(savedInstanceState)
         }
     }
 
-    private fun replaceFragment(fragment: Fragment, string: String) {
+    private fun replaceFragment(fragment: Int, string: String) {
         binding.title.text = string
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .addToBackStack(null)
-            .commit()
+        navController.navigate(fragment)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

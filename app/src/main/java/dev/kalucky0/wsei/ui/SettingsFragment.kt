@@ -14,11 +14,6 @@ import dev.kalucky0.wsei.data.models.Credentials
 import java.io.IOException
 
 class SettingsFragment : PreferenceFragmentCompat() {
-
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
-
     private lateinit var auth: Authentication
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

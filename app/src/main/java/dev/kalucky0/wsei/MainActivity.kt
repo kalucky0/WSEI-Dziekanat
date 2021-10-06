@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         binding.root.addDrawerListener(actionBarDrawerToggle)
 
         if (savedInstanceState == null)
-            replaceFragment(ScheduleFragment.newInstance(), getString(R.string.settings))
+            replaceFragment(ScheduleFragment.newInstance(), getString(R.string.schedule))
 
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)

@@ -3,7 +3,6 @@ package dev.kalucky0.wsei.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.PreferenceFragmentCompat
 import dev.kalucky0.wsei.R
 import androidx.preference.Preference
@@ -13,7 +12,6 @@ import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
 import dev.kalucky0.wsei.data.models.Credentials
 import java.io.IOException
-
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

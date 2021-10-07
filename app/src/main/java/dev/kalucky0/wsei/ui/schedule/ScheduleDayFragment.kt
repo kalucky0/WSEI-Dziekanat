@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils.Companion.db
 import dev.kalucky0.wsei.Utils.Companion.toPixels
 import dev.kalucky0.wsei.data.models.Schedule
+import dev.kalucky0.wsei.ui.payments.PaymentDialogFragment
 import kotlin.math.*
 
 class ScheduleDayFragment(private val schedule: List<Schedule>, private val day: String) :
@@ -31,12 +34,10 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         hoursView = view.findViewById(R.id.hours)
-        hoursView.layoutManager = LinearLayoutManager(context)
         hoursView.layoutManager = object : LinearLayoutManager(context) {
             override fun canScrollVertically(): Boolean = false
         }
         activitiesView = view.findViewById(R.id.activities)
-        activitiesView.layoutManager = LinearLayoutManager(context)
         activitiesView.layoutManager = object : LinearLayoutManager(context) {
             override fun canScrollVertically(): Boolean = false
         }

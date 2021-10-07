@@ -15,5 +15,6 @@ data class Schedule(
     val subject: String,
     val instructor: String,
     val type: String,
+    val group: String,
     val location: String
 )

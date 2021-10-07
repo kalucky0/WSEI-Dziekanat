@@ -4,17 +4,20 @@
     android:id="@+id/activity"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:paddingVertical="2dp"
     android:clipToPadding="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingVertical="2dp">
 
     <LinearLayout
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/schedule_item_bg"
+        android:background="@drawable/schedule_item_ripple"
+        android:clickable="true"
         android:clipToPadding="false"
         android:elevation="4dp"
+        android:focusable="true"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -24,8 +27,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
-            tools:text="Algebra liniowa"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:text="Algebra liniowa" />
 
         <TextView
             android:id="@+id/time"
@@ -38,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            tools:text="Jan Kowalski • F Praga"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            tools:text="Jan Kowalski • F Praga" />
     </LinearLayout>
 </LinearLayout>

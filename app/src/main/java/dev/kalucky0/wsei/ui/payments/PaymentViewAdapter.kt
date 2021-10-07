@@ -43,7 +43,7 @@ class PaymentViewAdapter(
 
         holder.item.setOnClickListener {
             val manager: FragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
-            PaymentDialogFragment(item).show(manager, "test")
+            PaymentDialogFragment(item).show(manager, "")
         }
 
         holder.idView.text = item.name.replaceFirstChar { it.uppercase() }

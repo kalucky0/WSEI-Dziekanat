@@ -31,6 +31,7 @@ class ScheduleData(callback: (ArrayList<Schedule>) -> Unit) {
                         cols[5].text(),
                         cols[4].text(),
                         cols[6].text(),
+                        cols[7].text(),
                         cols[8].text()
                     )
                     i++

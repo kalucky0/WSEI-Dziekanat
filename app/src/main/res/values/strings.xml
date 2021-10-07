@@ -21,4 +21,10 @@
     <string name="due_date">Termin</string>
     <string name="payment">Rata</string>
     <string name="payment_state">Stan opłaty</string>
+    <string name="time_from">Czas od</string>
+    <string name="instructor">Prowadzący</string>
+    <string name="group">Grupa</string>
+    <string name="time_to">Czas do</string>
+    <string name="form">Forma zajęć</string>
+    <string name="room">Sala</string>
 </resources>

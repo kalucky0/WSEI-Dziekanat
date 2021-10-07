@@ -5,7 +5,7 @@ import dev.kalucky0.wsei.data.models.Payment
 
 @Dao
 interface PaymentDao {
-    @Query("SELECT * FROM payment")
+    @Query("SELECT * FROM payment ORDER BY due")
     fun getAll(): List<Payment>
 
     @Insert()

@@ -17,4 +17,8 @@
     <string name="sync_success">Pomyślnie zsynchronizowano dane!</string>
     <string name="your_data">Twoje dane</string>
     <string name="sync_started">Rozpoczęto synchronizację!</string>
+    <string name="close">Zamknij</string>
+    <string name="due_date">Termin</string>
+    <string name="payment">Rata</string>
+    <string name="payment_state">Stan opłaty</string>
 </resources>

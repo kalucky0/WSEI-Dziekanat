@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         binding.slider.onDrawerItemClickListener = { _, drawerItem, _ ->
             when (drawerItem.identifier) {
                 1L -> replaceFragment(R.id.scheduleFragment, getString(R.string.schedule))
+                2L -> replaceFragment(R.id.paymentsFragment, getString(R.string.finances))
                 5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))
             }
             false
@@ -133,6 +134,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Int, string: String) {
+        binding.toolbar.elevation = if(fragment == R.id.scheduleFragment) 0f else 8f
         binding.title.text = string
         navController.navigate(fragment)
     }

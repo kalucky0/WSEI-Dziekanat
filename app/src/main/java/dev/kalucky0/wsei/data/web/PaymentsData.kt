@@ -17,14 +17,11 @@ class PaymentsData(callback: (ArrayList<Payment>) -> Unit) {
                     .header("Cookie", "ASP.NET_SessionId=${Utils.sessionId}").get()
 
             val rows: Elements = doc.select(".dxgvDataRow_Aqua")
-            var i = 0
-            for (row in rows) {
-                val cols = row.select("td")
-                val data = cols.map { it.text().trim() }
-                Log.e(
-                    "aa",
+            for ((i, row) in rows.withIndex()) {
+                val data = row.select("td").map { it.text().trim() }
+                payments.add(
                     Payment(
-                        0,
+                        i,
                         data[1],
                         LocalDate.parse(data[2]),
                         data[3],
@@ -32,7 +29,7 @@ class PaymentsData(callback: (ArrayList<Payment>) -> Unit) {
                         data[5].split(" ")[0].toInt(),
                         LocalDate.parse(if (data[7].isBlank()) "1970-01-01" else data[7]),
                         data[8]
-                    ).toString()
+                    )
                 )
             }
             callback(payments)

@@ -15,4 +15,10 @@
         android:id="@+id/settingsFragment"
         android:name="dev.kalucky0.wsei.ui.SettingsFragment"
         android:label="SettingsFragment" />
+
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="dev.kalucky0.wsei.ui.payments.PaymentsFragment"
+        android:label="fragment_payments_list"
+        tools:layout="@layout/fragment_payments" />
 </navigation>

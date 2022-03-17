@@ -17,8 +17,7 @@ class SchedulePagerAdapter(
     override fun getCount(): Int = days.size
 
     override fun getItem(i: Int): Fragment {
-        val fragment = ScheduleDayFragment(schedule, days[i].toString())
-        return fragment
+        return ScheduleDayFragment(schedule, days[i].toString())
     }
 
     override fun getPageTitle(position: Int): CharSequence {

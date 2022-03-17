@@ -1,19 +1,17 @@
 package dev.kalucky0.wsei.ui.schedule
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.kalucky0.wsei.R
-import dev.kalucky0.wsei.Utils.Companion.db
 import dev.kalucky0.wsei.Utils.Companion.toPixels
 import dev.kalucky0.wsei.data.models.Schedule
-import dev.kalucky0.wsei.ui.payments.PaymentDialogFragment
+import java.util.*
 import kotlin.math.*
 
 class ScheduleDayFragment(private val schedule: List<Schedule>, private val day: String) :
@@ -30,6 +28,7 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
     private var endHour: Int = 24
     private lateinit var hoursView: RecyclerView
     private lateinit var activitiesView: RecyclerView
+    private lateinit var timeIndicator: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -42,6 +41,8 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
             override fun canScrollVertically(): Boolean = false
         }
 
+        timeIndicator = view.findViewById(R.id.time_indicator)
+
         val activities: List<Schedule> = schedule.filter { it.day.toString() == day }
         setupSchedule(activities)
     }
@@ -49,6 +50,24 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
     private fun setupSchedule(activities: List<Schedule>) {
         startHour = max(floor(activities[0].timeFrom).roundToInt() - 2, 8)
         endHour = min(ceil(activities.last().timeTo).roundToInt() + 2, 24)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+            val minute = Calendar.getInstance().get(Calendar.MINUTE)
+            val today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+            val date = day.split("-")[2];
+
+            val currentHour = hour + minute / 60f
+
+            if (currentHour > startHour && currentHour < endHour && today == date) {
+                timeIndicator.translationY =
+                    toPixels(79f, context) * (currentHour - startHour) + toPixels(9f, context)
+            } else {
+                timeIndicator.alpha = 0f
+            }
+        } else {
+            timeIndicator.alpha = 0f
+        }
 
         val hours: ArrayList<String> = ArrayList()
         for (i in startHour..endHour) hours.add("$i:00")

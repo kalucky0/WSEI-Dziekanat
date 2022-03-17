@@ -9,15 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
-import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial
-import com.mikepenz.materialdrawer.iconics.iconicsIcon
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
-import com.mikepenz.materialdrawer.model.interfaces.descriptionText
-import com.mikepenz.materialdrawer.model.interfaces.iconUrl
-import com.mikepenz.materialdrawer.model.interfaces.nameRes
-import com.mikepenz.materialdrawer.model.interfaces.nameText
+import com.mikepenz.materialdrawer.model.interfaces.*
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import dev.kalucky0.wsei.data.AppDatabase
@@ -43,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-//        UpdateChecker.checkForUpdate(binding.root, this)
         actionBarDrawerToggle = ActionBarDrawerToggle(
             this,
             binding.root,
@@ -89,31 +83,46 @@ class MainActivity : AppCompatActivity() {
         binding.slider.itemAdapter.add(
             PrimaryDrawerItem().apply {
                 nameRes = R.string.schedule
-                iconicsIcon = CommunityMaterial.Icon3.cmd_timetable
+                iconRes = R.drawable.timetable
+                isIconTinted = true
                 isSelected = true
                 identifier = 1
             },
             PrimaryDrawerItem().apply {
                 nameRes = R.string.finances
-                iconicsIcon = CommunityMaterial.Icon.cmd_currency_usd
+                iconRes = R.drawable.currency_usd
+                isIconTinted = true
                 identifier = 2
             },
             PrimaryDrawerItem().apply {
                 nameRes = R.string.announcements
-                iconicsIcon = CommunityMaterial.Icon3.cmd_message_text_outline
+                iconRes = R.drawable.message_text_outline
+                isIconTinted = true
                 identifier = 3
             },
             DividerDrawerItem(),
             PrimaryDrawerItem().apply {
                 nameRes = R.string.your_data
-                iconicsIcon = CommunityMaterial.Icon.cmd_account_outline
+                iconRes = R.drawable.account_outline
+                isIconTinted = true
                 identifier = 4
             },
             PrimaryDrawerItem().apply {
                 nameRes = R.string.settings
-                iconicsIcon = CommunityMaterial.Icon.cmd_cog
+                iconRes = R.drawable.cog
+                isIconTinted = true
                 identifier = 5
             },
+//            SectionDrawerItem().apply {
+//                nameText = "New version (v1.2.2)"
+//            },
+//            PrimaryDrawerItem().apply {
+//                nameRes = R.string.download
+//                iconRes = R.drawable.download
+//                isIconTinted = true
+//                isSelected = true
+//                identifier = 6
+//            }
         )
 
         binding.slider.onDrawerItemClickListener = { _, drawerItem, _ ->
@@ -134,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Int, string: String) {
-        binding.toolbar.elevation = if(fragment == R.id.scheduleFragment) 0f else 8f
+        binding.toolbar.elevation = if (fragment == R.id.scheduleFragment) 0f else 8f
         binding.title.text = string
         navController.navigate(fragment)
     }

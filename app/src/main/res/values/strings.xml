@@ -5,6 +5,7 @@
     <string name="code">Code</string>
     <string name="finances">Finances</string>
     <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="schedule">Schedule</string>
     <string name="settings">Settings</string>
@@ -28,4 +29,5 @@
     <string name="form">Form of classes</string>
     <string name="instructor">Instructor</string>
     <string name="payment">Payment</string>
+    <string name="download">Download</string>
 </resources>

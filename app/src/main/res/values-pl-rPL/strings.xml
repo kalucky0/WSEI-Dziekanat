@@ -4,6 +4,7 @@
     <string name="code">Kod</string>
     <string name="finances">Finanse</string>
     <string name="login">Login</string>
+    <string name="sign_in">Zaloguj się</string>
     <string name="login_error">Wystąpił błąd podczas próby logowania!</string>
     <string name="password">Hasło</string>
     <string name="schedule">Plan zajęć</string>
@@ -27,4 +28,5 @@
     <string name="time_to">Czas do</string>
     <string name="form">Forma zajęć</string>
     <string name="room">Sala</string>
+    <string name="download">Pobierz</string>
 </resources>

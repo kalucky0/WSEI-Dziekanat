@@ -1,10 +1,8 @@
 package dev.kalucky0.wsei
 
 import android.app.Application
-import android.widget.Toast
 import com.osama.firecrasher.CrashListener
 import com.osama.firecrasher.FireCrasher
-import android.content.Intent
 
 class Application: Application() {
     override fun onCreate() {

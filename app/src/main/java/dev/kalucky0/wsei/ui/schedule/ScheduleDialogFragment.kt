@@ -3,7 +3,6 @@ package dev.kalucky0.wsei.ui.schedule
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.data.models.Schedule
@@ -15,7 +14,7 @@ import kotlin.math.floor
 class ScheduleDialogFragment(val schedule: Schedule): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding: DialogFragmentScheduleBinding = DialogFragmentScheduleBinding.inflate(
-            LayoutInflater.from(context))
+            layoutInflater)
 
         val alert = AlertDialog.Builder(requireContext())
             .setTitle(schedule.subject)

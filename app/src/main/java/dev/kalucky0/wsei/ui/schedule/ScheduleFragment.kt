@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.models.Schedule
 import kotlinx.datetime.LocalDate
+import java.time.format.TextStyle
+import java.util.*
 
 class ScheduleFragment : Fragment() {
     private lateinit var schedulePagerAdapter: SchedulePagerAdapter
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +33,14 @@ class ScheduleFragment : Fragment() {
             val schedule: List<Schedule> = Utils.db?.scheduleDao()!!.getAll()
 
             activity?.runOnUiThread {
-                schedulePagerAdapter = SchedulePagerAdapter(childFragmentManager, days, schedule)
+                schedulePagerAdapter = SchedulePagerAdapter(this, days, schedule)
                 viewPager = view.findViewById(R.id.schedule)
                 viewPager.adapter = schedulePagerAdapter
                 val tabLayout: TabLayout = view.findViewById(R.id.tab_layout)
-                tabLayout.setupWithViewPager(viewPager)
+                TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                    tab.text =
+                        days[position].dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
+                }.attach()
             }
         }.start()
     }

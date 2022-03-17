@@ -18,7 +18,7 @@ import java.net.URLEncoder
 class LoginActivity : AppCompatActivity() {
 
     private var binding: ActivityLoginBinding? = null
-    lateinit var auth: Authentication
+    private lateinit var auth: Authentication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

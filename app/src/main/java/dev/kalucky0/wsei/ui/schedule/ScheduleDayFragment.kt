@@ -55,7 +55,7 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val minute = Calendar.getInstance().get(Calendar.MINUTE)
             val today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
-            val date = day.split("-")[2];
+            val date = day.split("-")[2]
 
             val currentHour = hour + minute / 60f
 

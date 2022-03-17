@@ -8,8 +8,6 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class DrawerImgLoader(private val context: Context) :
     AbstractDrawerImageLoader() {

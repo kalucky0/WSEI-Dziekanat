@@ -10,7 +10,6 @@
         android:id="@+id/hour"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:textAlignment="textEnd"
         tools:text="9:00" />
 

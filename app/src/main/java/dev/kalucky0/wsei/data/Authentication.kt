@@ -23,7 +23,7 @@ class Authentication(val context: Context) {
         AlertDialog.Builder(context)
             .setTitle("Wpisz kod z obrazka")
             .setView(dialogBinding.root)
-            .setPositiveButton("Ok") { dialog, which ->
+            .setPositiveButton("Ok") { _, _ ->
                 captchaCode = dialogBinding.passwordField.editText?.text.toString()
             }.show()
 

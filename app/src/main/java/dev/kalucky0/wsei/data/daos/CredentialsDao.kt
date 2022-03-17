@@ -2,7 +2,6 @@ package dev.kalucky0.wsei.data.daos
 
 import androidx.room.*
 import dev.kalucky0.wsei.data.models.Credentials
-import dev.kalucky0.wsei.data.models.Student
 
 @Dao
 interface CredentialsDao {

@@ -1,6 +1,5 @@
 package dev.kalucky0.wsei.data.web
 
-import android.util.Log
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.models.Payment
 import kotlinx.datetime.LocalDate
@@ -27,7 +26,7 @@ class PaymentsData(callback: (ArrayList<Payment>) -> Unit) {
                         data[3],
                         data[4].split(" ")[0].toInt(),
                         data[5].split(" ")[0].toInt(),
-                        LocalDate.parse(if (data[7].isBlank()) "1970-01-01" else data[7]),
+                        LocalDate.parse(data[7].ifBlank { "1970-01-01" }),
                         data[8]
                     )
                 )

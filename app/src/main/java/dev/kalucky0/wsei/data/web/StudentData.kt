@@ -1,6 +1,5 @@
 package dev.kalucky0.wsei.data.web
 
-import android.util.Log
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.models.Student
 import kotlinx.datetime.LocalDate

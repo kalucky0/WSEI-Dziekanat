@@ -2,9 +2,6 @@ package dev.kalucky0.wsei
 
 import android.content.Context
 import dev.kalucky0.wsei.data.AppDatabase
-import dev.kalucky0.wsei.data.models.Schedule
-import dev.kalucky0.wsei.data.models.Student
-import kotlinx.datetime.LocalDate
 import okhttp3.OkHttpClient
 import okhttp3.Request
 

@@ -29,4 +29,7 @@
     <string name="form">Forma zajęć</string>
     <string name="room">Sala</string>
     <string name="download">Pobierz</string>
+    <string name="personal">Osobowe</string>
+    <string name="addresses">Adresy</string>
+    <string name="education">Wykształcenie</string>
 </resources>

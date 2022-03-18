@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
@@ -64,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
         val login = URLEncoder.encode(binding?.loginField!!.editText?.text.toString(), "utf-8")
         val password =
             URLEncoder.encode(binding?.passwordField!!.editText?.text.toString(), "utf-8")
+        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
         Thread {
             val test = auth.tryLogin(login, password, formFields)
             if (test!!.contains("/Konto/Zdjecie/")) {

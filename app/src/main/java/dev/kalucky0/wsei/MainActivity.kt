@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             when (drawerItem.identifier) {
                 1L -> replaceFragment(R.id.scheduleFragment, getString(R.string.schedule))
                 2L -> replaceFragment(R.id.paymentsFragment, getString(R.string.finances))
+                4L -> replaceFragment(R.id.profileFragment, getString(R.string.your_data))
                 5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))
             }
             false
@@ -143,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Int, string: String) {
-        binding.toolbar.elevation = if (fragment == R.id.scheduleFragment) 0f else 8f
+        binding.toolbar.elevation = if (fragment == R.id.scheduleFragment || fragment == R.id.profileFragment) 0f else 8f
         binding.title.text = string
         navController.navigate(fragment)
     }

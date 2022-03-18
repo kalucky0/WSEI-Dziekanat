@@ -30,4 +30,7 @@
     <string name="instructor">Instructor</string>
     <string name="payment">Payment</string>
     <string name="download">Download</string>
+    <string name="personal">Personal</string>
+    <string name="addresses">Addresses</string>
+    <string name="education">Education</string>
 </resources>

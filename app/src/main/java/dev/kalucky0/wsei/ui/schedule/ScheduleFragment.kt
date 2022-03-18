@@ -29,8 +29,8 @@ class ScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Thread {
-            val days: List<LocalDate> = Utils.db?.scheduleDao()!!.getAllDates()
-            val schedule: List<Schedule> = Utils.db?.scheduleDao()!!.getAll()
+            val days: List<LocalDate> = Utils.db?.scheduleDao()?.getAllDates() ?: emptyList()
+            val schedule: List<Schedule> = Utils.db?.scheduleDao()?.getAll() ?: emptyList()
 
             activity?.runOnUiThread {
                 schedulePagerAdapter = SchedulePagerAdapter(this, days, schedule)

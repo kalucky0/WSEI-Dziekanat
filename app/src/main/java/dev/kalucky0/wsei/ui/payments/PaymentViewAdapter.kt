@@ -42,13 +42,27 @@ class PaymentViewAdapter(
         val item = values[position]
 
         holder.item.setOnClickListener {
-            val manager: FragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+            val manager: FragmentManager =
+                (holder.itemView.context as AppCompatActivity).supportFragmentManager
             PaymentDialogFragment(item).show(manager, "")
         }
 
         holder.idView.text = item.name.replaceFirstChar { it.uppercase() }
-        if(item.state == "Uregulowane")
-            holder.contentView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.green_500))
+        if (item.state == "Uregulowane")
+            holder.contentView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.green_500
+                )
+            )
+
+        if (item.state == "Bieżąca zaległość")
+            holder.contentView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.red_500
+                )
+            )
         holder.contentView.text = "${item.amountNow} PLN"
     }
 

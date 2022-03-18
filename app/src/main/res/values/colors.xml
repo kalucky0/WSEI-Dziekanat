@@ -6,6 +6,7 @@
     <color name="amber_200">#ffe082</color>
     <color name="amber_500">#ffc107</color>
     <color name="amber_700">#ffa000</color>
+    <color name="red_500">#f44336</color>
 
     <color name="gray">#2D2D2D</color>
     <color name="gray_900">#121212</color>

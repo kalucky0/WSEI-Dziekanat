@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             when (drawerItem.identifier) {
                 1L -> replaceFragment(R.id.scheduleFragment, getString(R.string.schedule))
                 2L -> replaceFragment(R.id.paymentsFragment, getString(R.string.finances))
+                3L -> replaceFragment(R.id.announcementsFragment, getString(R.string.announcements))
                 4L -> replaceFragment(R.id.profileFragment, getString(R.string.your_data))
                 5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))
             }

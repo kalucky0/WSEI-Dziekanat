@@ -21,8 +21,16 @@
         android:name="dev.kalucky0.wsei.ui.payments.PaymentsFragment"
         android:label="fragment_payments_list"
         tools:layout="@layout/fragment_payments" />
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="dev.kalucky0.wsei.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/announcementsFragment"
+        android:name="dev.kalucky0.wsei.ui.announcements.AnnouncementsFragment"
+        android:label="fragment_announcements"
+        tools:layout="@layout/fragment_announcements" />
 </navigation>

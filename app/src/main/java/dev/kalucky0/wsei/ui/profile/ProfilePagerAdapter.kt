@@ -10,6 +10,10 @@ class ProfilePagerAdapter(
     override fun getItemCount(): Int = 3
 
     override fun createFragment(i: Int): Fragment {
-        return ProfileTabFragment()
+        return when (i) {
+            0 -> PersonalTabFragment()
+            1 -> AddressesTabFragment()
+            else -> EducationTabFragment()
+        }
     }
 }

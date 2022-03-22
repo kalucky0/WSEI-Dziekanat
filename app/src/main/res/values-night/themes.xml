@@ -29,4 +29,9 @@
     <style name="Theme.WSEIDziekanat.Toolbar" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/gray</item>
     </style>
+
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

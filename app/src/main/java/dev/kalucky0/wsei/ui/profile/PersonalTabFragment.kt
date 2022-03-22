@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dev.kalucky0.wsei.R
 
-class ProfileTabFragment  :
+class PersonalTabFragment :
     Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_profile_tab, container, false)
+        return inflater.inflate(R.layout.fragment_personal_tab, container, false)
     }
 }

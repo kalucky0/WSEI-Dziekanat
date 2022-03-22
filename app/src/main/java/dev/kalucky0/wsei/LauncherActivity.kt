@@ -16,5 +16,7 @@ class LauncherActivity : Activity() {
             startActivity(Intent(this, LoginActivity::class.java))
         else
             startActivity(Intent(this, MainActivity::class.java))
+
+        finish()
     }
 }

@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         binding.subtitle.text = "${student.name} ${student.surname}"
         accountHeader.addProfiles(ProfileDrawerItem().apply {
             nameText = student.name + " " + student.surname
-            descriptionText = student.email
+            descriptionText = student.personalEmail
             iconUrl = "https://dziekanat.wsei.edu.pl/Konto/Zdjecie/1"
             identifier = 102
         })

@@ -5,7 +5,6 @@ import dev.kalucky0.wsei.data.models.Student
 import kotlinx.datetime.LocalDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
 
 
 class StudentData(val callback: (Student) -> Unit) {
@@ -28,7 +27,9 @@ class StudentData(val callback: (Student) -> Unit) {
             doc =
                 Jsoup.connect("https://dziekanat.wsei.edu.pl/TokStudiow/StudentTwojeDane/Adresy")
                     .header("Cookie", "ASP.NET_SessionId=${Utils.sessionId}").get()
-            val sensitiveAddress: Elements = doc.select("span.sensitive")
+
+            val addressData = doc.select("span.sensitive")
+            val additional = doc.select("td.dane").last()!!.text()
 
             callback(
                 Student(
@@ -56,19 +57,19 @@ class StudentData(val callback: (Student) -> Unit) {
                     personalData[17].`val`(),
                     personalData[18].`val`(),
                     personalData[19].`val`(),
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
+                    addressData[1].text(),
+                    addressData[2].text(),
+                    addressData[3].text(),
+                    addressData[4].text(),
+                    addressData[5].text(),
+                    addressData[6].text(),
+                    addressData[7].text(),
+                    addressData[9].text(),
+                    addressData[10].text(),
+                    addressData[11].text(),
+                    addressData[12].text(),
+                    addressData[13].text(),
+                    additional,
                     "",
                     LocalDate.parse("2000-01-01"),
                     0,

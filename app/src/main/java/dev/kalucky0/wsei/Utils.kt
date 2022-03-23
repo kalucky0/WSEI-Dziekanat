@@ -2,6 +2,7 @@ package dev.kalucky0.wsei
 
 import android.content.Context
 import dev.kalucky0.wsei.data.AppDatabase
+import dev.kalucky0.wsei.data.models.Student
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -10,6 +11,7 @@ class Utils {
         var db: AppDatabase? = null
         var sessionId: String = ""
         lateinit var downloaderClient: OkHttpClient
+        lateinit var student: Student
 
         fun initHttpClient() {
             if(this::downloaderClient.isInitialized) return

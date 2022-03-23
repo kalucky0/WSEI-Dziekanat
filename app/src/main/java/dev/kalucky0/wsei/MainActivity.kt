@@ -61,7 +61,8 @@ class MainActivity : AppCompatActivity() {
             ).fallbackToDestructiveMigration().build()
 
         Thread {
-            student = Utils.db?.studentDao()!!.getAll()[0]
+            Utils.student = Utils.db?.studentDao()!!.getStudent()
+            student = Utils.student
             runOnUiThread { updateHeader() }
         }.start()
     }

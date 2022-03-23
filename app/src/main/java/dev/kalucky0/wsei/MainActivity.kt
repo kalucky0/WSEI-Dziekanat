@@ -145,9 +145,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun replaceFragment(fragment: Int, string: String) {
         binding.toolbar.elevation = if (fragment == R.id.scheduleFragment || fragment == R.id.profileFragment) 0f else 8f
         binding.title.text = string
+        binding.subtitle.text = "${student.name} ${student.surname}"
         navController.navigate(fragment)
     }
 

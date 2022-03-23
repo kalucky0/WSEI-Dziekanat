@@ -18,6 +18,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="2"
+        android:minLines="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="16sp"
         tools:text="Komunikat rektora w sprawie powrotu do nauki stacjonarnej" />

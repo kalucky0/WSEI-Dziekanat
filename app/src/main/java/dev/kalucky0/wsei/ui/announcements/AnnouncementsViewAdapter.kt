@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import dev.kalucky0.wsei.data.models.Announcement
 import dev.kalucky0.wsei.databinding.ItemAnnouncementsBinding
 
 class AnnouncementsViewAdapter(
-    private val values: List<String>
+    private val values: List<Announcement>
 ) : RecyclerView.Adapter<AnnouncementsViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(binding: ItemAnnouncementsBinding) :
@@ -36,9 +37,9 @@ class AnnouncementsViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
 
-        holder.contentView.text = ""
-        holder.dateView.text = ""
-        holder.priorityView.text = ""
+        holder.contentView.text = item.title
+        holder.dateView.text = item.date
+        holder.priorityView.text = item.priority
     }
 
     override fun getItemCount(): Int = values.size

@@ -41,7 +41,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Snackbar.make(
                 requireActivity().findViewById(android.R.id.content),
                 getString(R.string.sync_started),
-                Snackbar.LENGTH_SHORT
+                Snackbar.LENGTH_LONG
             ).show()
 
             Thread {
@@ -126,18 +126,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         apply()
                     }
 
+                    requireActivity().runOnUiThread {
+                        Snackbar.make(
+                            requireActivity().findViewById(android.R.id.content),
+                            getString(R.string.sync_success),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } else {
+                requireActivity().runOnUiThread {
                     Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        getString(R.string.sync_success),
+                        getString(R.string.sync_error),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
-            } else {
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.sync_error),
-                    Snackbar.LENGTH_LONG
-                ).show()
             }
         } catch (e: IOException) {
             e.printStackTrace()

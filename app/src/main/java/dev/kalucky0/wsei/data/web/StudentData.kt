@@ -2,10 +2,8 @@ package dev.kalucky0.wsei.data.web
 
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.models.Student
-import kotlinx.datetime.LocalDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-
 
 class StudentData(val callback: (Student) -> Unit) {
     init {
@@ -31,6 +29,12 @@ class StudentData(val callback: (Student) -> Unit) {
             val addressData = doc.select("span.sensitive")
             val additional = doc.select("td.dane").last()!!.text()
 
+            doc =
+                Jsoup.connect("https://dziekanat.wsei.edu.pl/TokStudiow/StudentTwojeDane/Wyksztalcenie")
+                    .header("Cookie", "ASP.NET_SessionId=${Utils.sessionId}").get()
+
+            val educationData = doc.select("td.dane")
+
             callback(
                 Student(
                     0,
@@ -40,7 +44,7 @@ class StudentData(val callback: (Student) -> Unit) {
                     index.split("szary\">")[1].split("<")[0],
                     index.split("<br>")[2].split("<br>")[0].trim(),
                     personalData[3].`val`(),
-                    LocalDate.parse(generalData[11].text()),
+                    generalData[11].text(),
                     city,
                     personalData[5].`val`(),
                     generalData[17].text(),
@@ -70,25 +74,25 @@ class StudentData(val callback: (Student) -> Unit) {
                     addressData[12].text(),
                     addressData[13].text(),
                     additional,
-                    "",
-                    LocalDate.parse("2000-01-01"),
-                    0,
-                    "",
-                    "",
-                    "",
-                    LocalDate.parse("2000-01-01"),
-                    LocalDate.parse("2000-01-01"),
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
+                    educationData[1].text(),
+                    educationData[3].text(),
+                    Integer.parseInt(educationData[5].text()),
+                    educationData[7].text() + ",\n" + educationData[8].text() + ",\n" + educationData[9].text(),
+                    educationData[11].text(),
+                    educationData[13].text(),
+                    educationData[15].text(),
+                    educationData[17].text(),
+                    educationData[19].text(),
+                    educationData[21].text(),
+                    educationData[23].text(),
+                    educationData[25].text(),
+                    educationData[27].text()
                 )
             )
         }.start()
     }
 
-    fun selectVal(doc: Document, id: String): String {
+    private fun selectVal(doc: Document, id: String): String {
         return doc.select("#$id > option[selected]").text()
     }
 }

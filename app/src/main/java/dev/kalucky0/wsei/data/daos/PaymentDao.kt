@@ -8,7 +8,7 @@ interface PaymentDao {
     @Query("SELECT * FROM payment ORDER BY due")
     fun getAll(): List<Payment>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg users: Payment)
 
     @Delete

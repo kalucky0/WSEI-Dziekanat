@@ -2,8 +2,6 @@ package dev.kalucky0.wsei.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import dev.kalucky0.wsei.data.converters.DateConverter
 import kotlinx.datetime.LocalDate
 
 @Entity
@@ -15,7 +13,7 @@ data class Student(
     val course: String,
     val index: String,
     val pesel: String,
-    @TypeConverters(DateConverter::class) val birthdate: LocalDate,
+    val birthdate: String,
     val birtPlace: String,
     val nip: String,
     val sex: String,
@@ -46,13 +44,13 @@ data class Student(
     val mobile: String,
     val additional: String,
     val maturaId: String,
-    @TypeConverters(DateConverter::class) val maturaDate: LocalDate,
+    val maturaDate: String,
     val graduationHighSchool: Int,
     val highSchool: String,
     val maturaType: String,
     val diplomaNumber: String,
-    @TypeConverters(DateConverter::class) val diplomaIssueDate: LocalDate,
-    @TypeConverters(DateConverter::class) val graduationUni: LocalDate,
+    val diplomaIssueDate: String,
+    val graduationUni: String,
     val university: String,
     val faculty: String,
     val specialization: String,

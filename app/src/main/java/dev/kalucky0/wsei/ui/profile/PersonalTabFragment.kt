@@ -35,7 +35,7 @@ class PersonalTabFragment :
         binding.personalSurname.text = s.surname
         binding.personalSecName.text = s.secondName.ifEmpty { "—" }
         binding.personalPesel.text = s.pesel.ifEmpty { "—" }
-        binding.personalBirthDate.text = s.birthdate.toString()
+        binding.personalBirthDate.text = s.birthdate
         binding.personalBirthPlace.text = s.birtPlace
         binding.personalNip.text = s.nip.ifEmpty { "—" }
         binding.personalSex.text = s.sex

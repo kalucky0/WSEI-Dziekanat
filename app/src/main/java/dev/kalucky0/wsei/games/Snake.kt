@@ -115,7 +115,7 @@ class Snake(context: Context?, attributes: AttributeSet) : View(context, attribu
     private val bgColor = Color.parseColor("#121212")
     private val cellColor = Color.parseColor("#1a1a1a")
     private val appleColor = Color.parseColor("#E53935")
-    private val grayAppleColor = Color.parseColor("#E53935")
+    private val grayAppleColor = Color.parseColor("#8c8c8c")
     private val snakeColor = Color.parseColor("#689F38")
     private val graySnakeColor = Color.parseColor("#6c6c6c")
 

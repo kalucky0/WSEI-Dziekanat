@@ -2,9 +2,9 @@
     <PreferenceCategory app:title="@string/sync_header">
 
         <SwitchPreferenceCompat
+            app:enabled="false"
             app:key="sync_auto"
             app:summary="@string/sync_auto_summary"
-            app:enabled="false"
             app:title="@string/sync_auto" />
 
         <Preference
@@ -22,11 +22,13 @@
             app:title="Snake" />
 
         <Preference
+            app:enabled="false"
             app:key="pacman_game"
             app:summary="Waka! Waka! Waka!"
             app:title="Pac-Man" />
 
         <Preference
+            app:enabled="false"
             app:key="space_invaders_game"
             app:summary="@string/shoot_spaceships"
             app:title="Space Invaders" />
@@ -44,6 +46,11 @@
             app:key="report_bug"
             app:summary="@string/issue_on_github"
             app:title="@string/report_bug" />
+
+        <Preference
+            app:key="version"
+            app:summary="v0.0.0 [0]"
+            app:title="@string/app_version" />
 
     </PreferenceCategory>
 

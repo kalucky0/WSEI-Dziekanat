@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
+import dev.kalucky0.wsei.BuildConfig
 import dev.kalucky0.wsei.LoginActivity
 import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
@@ -33,6 +34,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val spaceInvadersButton: Preference? = findPreference("space_invaders_game")
         val githubButton: Preference? = findPreference("github")
         val reportButton: Preference? = findPreference("report_bug")
+        val versionLabel: Preference? = findPreference("version")
         val logoutButton: Preference? = findPreference("logout")
 
         val sharedPref = activity?.getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
@@ -84,6 +86,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             startActivity(browserIntent)
             true
         }
+
+        versionLabel?.summary = "v${BuildConfig.VERSION_NAME} [${BuildConfig.VERSION_CODE}]"
 
         logoutButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             Thread {

@@ -1,11 +1,15 @@
 package dev.kalucky0.wsei
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
@@ -61,9 +65,13 @@ class MainActivity : AppCompatActivity() {
             ).fallbackToDestructiveMigration().build()
 
         Thread {
-            Utils.student = Utils.db?.studentDao()!!.getStudent()
-            student = Utils.student
-            runOnUiThread { updateHeader() }
+            try {
+                Utils.student = Utils.db?.studentDao()!!.getStudent()
+                student = Utils.student
+                runOnUiThread { updateHeader() }
+            } catch (e: Exception) {
+                logout()
+            }
         }.start()
     }
 
@@ -147,7 +155,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun replaceFragment(fragment: Int, string: String) {
-        binding.toolbar.elevation = if (fragment == R.id.scheduleFragment || fragment == R.id.profileFragment) 0f else 8f
+        binding.toolbar.elevation =
+            if (fragment == R.id.scheduleFragment || fragment == R.id.profileFragment) 0f else 8f
         binding.title.text = string
         binding.subtitle.text = "${student.name} ${student.surname}"
         navController.navigate(fragment)
@@ -159,6 +168,20 @@ class MainActivity : AppCompatActivity() {
 
     fun updateTitle(string: String) {
         binding.title.text = string
+    }
+
+    private fun logout() {
+        Thread {
+            Utils.db?.clearAllTables()
+        }.start()
+
+        val sharedPref = getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
+        sharedPref?.edit()?.clear()?.apply()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

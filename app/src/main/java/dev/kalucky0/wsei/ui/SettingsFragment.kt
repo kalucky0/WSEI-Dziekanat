@@ -6,17 +6,18 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.preference.PreferenceFragmentCompat
-import dev.kalucky0.wsei.R
+import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
 import dev.kalucky0.wsei.LoginActivity
+import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
 import dev.kalucky0.wsei.data.models.Credentials
 import java.io.IOException
+
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var auth: Authentication
@@ -51,7 +52,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         snakeButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            Toast.makeText(requireContext(), "Snake game coming soon", Toast.LENGTH_SHORT).show()
+            val navHostFragment =
+                activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            navHostFragment.navController.navigate(R.id.snakeFragment)
             true
         }
 

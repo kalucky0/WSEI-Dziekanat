@@ -33,4 +33,10 @@
         android:name="dev.kalucky0.wsei.ui.announcements.AnnouncementsFragment"
         android:label="fragment_announcements"
         tools:layout="@layout/fragment_announcements" />
+
+    <fragment
+        android:id="@+id/snakeFragment"
+        android:name="dev.kalucky0.wsei.ui.games.SnakeFragment"
+        android:label="fragment_snake"
+        tools:layout="@layout/fragment_snake" />
 </navigation>

@@ -150,6 +150,14 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(fragment)
     }
 
+    fun updateSubtitle(string: String) {
+        binding.subtitle.text = string
+    }
+
+    fun updateTitle(string: String) {
+        binding.title.text = string
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         actionBarDrawerToggle.onConfigurationChanged(newConfig)

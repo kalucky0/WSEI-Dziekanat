@@ -20,6 +20,7 @@
         <activity
             android:name=".MainActivity"
             android:fitsSystemWindows="true"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LauncherActivity"

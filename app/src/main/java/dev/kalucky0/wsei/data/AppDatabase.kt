@@ -13,7 +13,7 @@ import dev.kalucky0.wsei.data.models.Payment
 import dev.kalucky0.wsei.data.models.Schedule
 import dev.kalucky0.wsei.data.models.Student
 
-@Database(entities = [Credentials::class, Student::class, Schedule::class, Payment::class], version = 2)
+@Database(entities = [Credentials::class, Student::class, Schedule::class, Payment::class], version = 3)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun studentDao(): StudentDao

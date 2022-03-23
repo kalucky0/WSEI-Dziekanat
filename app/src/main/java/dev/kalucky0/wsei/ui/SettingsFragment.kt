@@ -1,12 +1,17 @@
 package dev.kalucky0.wsei.ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceFragmentCompat
 import dev.kalucky0.wsei.R
 import androidx.preference.Preference
 import com.google.android.material.snackbar.Snackbar
+import dev.kalucky0.wsei.LoginActivity
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
@@ -21,10 +26,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         auth = Authentication(requireContext())
 
-        val button: Preference? = findPreference("sync_now")
+        val syncButton: Preference? = findPreference("sync_now")
+        val snakeButton: Preference? = findPreference("snake_game")
+        val pacmanButton: Preference? = findPreference("pacman_game")
+        val spaceInvadersButton: Preference? = findPreference("space_invaders_game")
+        val githubButton: Preference? = findPreference("github")
+        val reportButton: Preference? = findPreference("report_bug")
+        val logoutButton: Preference? = findPreference("logout")
+
         val sharedPref = activity?.getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
 
-        button?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+        syncButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             Snackbar.make(
                 requireActivity().findViewById(android.R.id.content),
                 getString(R.string.sync_started),
@@ -35,6 +47,55 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val cred = Utils.db?.credentialsDao()!!.getAll()[0]
                 synchronizeData(cred, sharedPref)
             }.start()
+            true
+        }
+
+        snakeButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            Toast.makeText(requireContext(), "Snake game coming soon", Toast.LENGTH_SHORT).show()
+            true
+        }
+
+        pacmanButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            Toast.makeText(requireContext(), "Waka! Waka! Waka!", Toast.LENGTH_SHORT).show()
+            true
+        }
+
+        spaceInvadersButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            Toast.makeText(requireContext(), "Space Invaders game coming soon", Toast.LENGTH_SHORT)
+                .show()
+            true
+        }
+
+        githubButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/kalucky0/WSEI-Dziekanat"))
+            startActivity(browserIntent)
+            true
+        }
+
+        reportButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            val browserIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://github.com/kalucky0/WSEI-Dziekanat/issues/new")
+            )
+            startActivity(browserIntent)
+            true
+        }
+
+        logoutButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            Thread {
+                Utils.db?.clearAllTables()
+            }.start()
+
+            Toast.makeText(requireContext(), getString(R.string.logging_out), Toast.LENGTH_LONG)
+                .show()
+
+            sharedPref?.edit()?.clear()?.apply()
+
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
             true
         }
     }

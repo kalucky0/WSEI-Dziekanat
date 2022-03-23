@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="account">Konto</string>
     <string name="account_number">Numer konta</string>
     <string name="additional">Dodatkowe</string>
     <string name="addresses">Adresy</string>
     <string name="announcements">Ogłoszenia</string>
+    <string name="app">Aplikacja</string>
     <string name="bank_name">Bank</string>
     <string name="birth_date">Data urodzenia</string>
     <string name="birth_place">Miejsce urodzenia</string>
@@ -23,14 +26,20 @@
     <string name="father_name">Imię ojca</string>
     <string name="finances">Finanse</string>
     <string name="form">Forma zajęć</string>
+    <string name="games">Gry</string>
+    <string name="github_repo">Repozytorium GitHub</string>
     <string name="group">Grupa</string>
     <string name="high_school">Szkoła średnia</string>
     <string name="id_issued_by">Dowód wydany przez</string>
     <string name="instructor">Prowadzący</string>
     <string name="issue_date">Data wydania</string>
+    <string name="issue_on_github">Zgłoś problem na GitHub</string>
     <string name="landline_number">Numer stacjonarny</string>
+    <string name="logging_out">Wylogowywanie…</string>
     <string name="login">Login</string>
     <string name="login_error">Wystąpił błąd podczas próby logowania!</string>
+    <string name="logout">Wyloguj</string>
+    <string name="logout_and_clear_data">Wyloguj i wyczyść dane</string>
     <string name="marital_status">Stan cywilny</string>
     <string name="matura_exam_number">Numer świadectwa maturalnego</string>
     <string name="matura_type">Typ matury</string>
@@ -39,6 +48,7 @@
     <string name="mother_name">Imię matki</string>
     <string name="name">Imię</string>
     <string name="nationality">Narodowość</string>
+    <string name="open_repo">Otwórz repozytorium GitHub w przeglądarce</string>
     <string name="other_universities">Inne uczelnie</string>
     <string name="passport">Paszport</string>
     <string name="password">Hasło</string>
@@ -51,6 +61,7 @@
     <string name="postal_office">Poczta</string>
     <string name="previous_place_of_residence">Poprzednie miejsce zamieszkania</string>
     <string name="private_email">Prywatny email</string>
+    <string name="report_bug">Zgłoś błąd</string>
     <string name="room">Sala</string>
     <string name="schedule">Plan zajęć</string>
     <string name="school">Szkoła</string>
@@ -58,7 +69,9 @@
     <string name="series_and_number_of_identity_card">Seria i numer dowodu osobistego</string>
     <string name="settings">Ustawienia</string>
     <string name="sex">Płeć</string>
+    <string name="shoot_spaceships">Strzelaj do obcych statków kosmicznych</string>
     <string name="sign_in">Zaloguj się</string>
+    <string name="snake_survive">Przetrwaj tak długo, jak możesz</string>
     <string name="specialization">Specjalność</string>
     <string name="street">Ulica</string>
     <string name="surname">Nazwisko</string>

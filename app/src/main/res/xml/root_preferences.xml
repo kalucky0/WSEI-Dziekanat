@@ -14,4 +14,46 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/games">
+
+        <Preference
+            app:key="snake_game"
+            app:summary="@string/snake_survive"
+            app:title="Snake" />
+
+        <Preference
+            app:key="pacman_game"
+            app:summary="Waka! Waka! Waka!"
+            app:title="Pac-Man" />
+
+        <Preference
+            app:key="space_invaders_game"
+            app:summary="@string/shoot_spaceships"
+            app:title="Space Invaders" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/app">
+
+        <Preference
+            app:key="github"
+            app:summary="@string/open_repo"
+            app:title="@string/github_repo" />
+
+        <Preference
+            app:key="report_bug"
+            app:summary="@string/issue_on_github"
+            app:title="@string/report_bug" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/account">
+
+        <Preference
+            app:key="logout"
+            app:summary="@string/logout_and_clear_data"
+            app:title="@string/logout" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

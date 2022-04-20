@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Kwota stanu"
+                android:text="@string/remaining_amount"
                 android:textSize="12sp" />
 
             <TextView
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
-        android:text="Dodatkowe" />
+        android:text="@string/additional" />
 
     <TextView
         android:id="@+id/additional"

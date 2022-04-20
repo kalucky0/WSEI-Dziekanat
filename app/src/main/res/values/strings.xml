@@ -7,6 +7,7 @@
     <string name="announcements">Announcements</string>
     <string name="app">App</string>
     <string name="app_name" translatable="false">WSEI Dziekanat</string>
+    <string name="app_version">App version</string>
     <string name="bank_name">Bank</string>
     <string name="birth_date">Birth date</string>
     <string name="birth_place">Birth place</string>
@@ -64,6 +65,7 @@
     <string name="postal_office">Postal office</string>
     <string name="previous_place_of_residence">Previous place of residence</string>
     <string name="private_email">Private e-mail</string>
+    <string name="remaining_amount">Remaining amount</string>
     <string name="report_bug">Report a bug</string>
     <string name="room">Location</string>
     <string name="schedule">Schedule</string>
@@ -93,5 +95,4 @@
     <string name="work_experience">Work experience</string>
     <string name="year_of_graduation">Year of graduation</string>
     <string name="your_data">Your data</string>
-    <string name="app_version">App version</string>
 </resources>

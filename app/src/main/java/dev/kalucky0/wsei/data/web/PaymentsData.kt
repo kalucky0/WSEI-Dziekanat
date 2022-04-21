@@ -7,9 +7,9 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
-class PaymentsData(callback: (ArrayList<Payment>) -> Unit) {
-    init {
-        Thread {
+class PaymentsData {
+    companion object {
+        fun get(): ArrayList<Payment> {
             val payments: ArrayList<Payment> = ArrayList()
             val doc: Document =
                 Jsoup.connect("https://dziekanat.wsei.edu.pl/Finanse/StudentFinanse/Oplaty")
@@ -31,7 +31,7 @@ class PaymentsData(callback: (ArrayList<Payment>) -> Unit) {
                     )
                 )
             }
-            callback(payments)
-        }.start()
+            return payments
+        }
     }
 }

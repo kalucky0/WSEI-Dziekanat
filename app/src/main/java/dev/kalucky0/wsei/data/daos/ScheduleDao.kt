@@ -21,4 +21,6 @@ interface ScheduleDao {
     @Delete
     fun delete(user: Schedule)
 
+    @Query("DELETE FROM schedule")
+    fun deleteAll()
 }

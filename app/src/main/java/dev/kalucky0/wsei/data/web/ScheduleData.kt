@@ -7,9 +7,9 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
-class ScheduleData(callback: (ArrayList<Schedule>) -> Unit) {
-    init {
-        Thread {
+class ScheduleData {
+    companion object {
+        fun get(): ArrayList<Schedule> {
             val data: ArrayList<Schedule> = ArrayList()
             val doc: Document =
                 Jsoup.connect("https://dziekanat.wsei.edu.pl/Plany/PlanyStudentow")
@@ -38,19 +38,19 @@ class ScheduleData(callback: (ArrayList<Schedule>) -> Unit) {
                     data.add(activity)
                 }
             }
-            callback(data)
-        }.start()
-    }
+            return data;
+        }
 
-    private fun findDate(text: String): String {
-        val regex = Regex("....-..-..")
-        return regex.find(text)!!.groupValues[0]
-    }
+        private fun findDate(text: String): String {
+            val regex = Regex("....-..-..")
+            return regex.find(text)!!.groupValues[0]
+        }
 
-    private fun parseHour(time: String): Float {
-        val time = time.split(":")
-        val hour: Int = time[0].toInt()
-        val minutes: Float = time[1].toFloat() / 60
-        return hour + minutes
+        private fun parseHour(time: String): Float {
+            val time = time.split(":")
+            val hour: Int = time[0].toInt()
+            val minutes: Float = time[1].toFloat() / 60
+            return hour + minutes
+        }
     }
 }

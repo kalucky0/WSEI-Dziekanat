@@ -7,19 +7,19 @@ import dev.kalucky0.wsei.data.web.StudentData
 
 class SynchronizeData(callback: () -> Unit) {
     init {
-        Thread {
-            StudentData { student ->
-                Utils.db!!.studentDao().insertAll(student)
-                ScheduleData { schedule ->
-                    for (item in schedule)
-                        Utils.db!!.scheduleDao().insertAll(item)
-                    PaymentsData { payments ->
-                        for (item in payments)
-                            Utils.db!!.paymentDao().insertAll(item)
-                        callback()
-                    }
-                }
-            }
-        }.start()
+        val student = StudentData.get()
+        Utils.db!!.studentDao().insertAll(student)
+
+        val schedule = ScheduleData.get()
+        Utils.db!!.scheduleDao().deleteAll()
+
+        for (item in schedule)
+            Utils.db!!.scheduleDao().insertAll(item)
+
+        val payments = PaymentsData.get()
+        for (item in payments)
+            Utils.db!!.paymentDao().insertAll(item)
+
+        callback()
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
+import dev.kalucky0.wsei.R
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.databinding.DialogCaptchaBinding
 import okhttp3.MediaType
@@ -21,7 +22,7 @@ class Authentication(val context: Context) {
         val dialogBinding: DialogCaptchaBinding =
             DialogCaptchaBinding.inflate(LayoutInflater.from(context))
         AlertDialog.Builder(context)
-            .setTitle("Wpisz kod z obrazka")
+            .setTitle(context.getString(R.string.enter_code))
             .setView(dialogBinding.root)
             .setPositiveButton("Ok") { _, _ ->
                 captchaCode = dialogBinding.passwordField.editText?.text.toString()

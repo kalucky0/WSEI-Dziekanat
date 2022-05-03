@@ -58,8 +58,6 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'com.google.android.material:material:1.5.0'
 
-    implementation 'com.github.osama-raddad:FireCrasher:2.0.1'
-
     implementation 'com.mikepenz:materialdrawer-nav:8.4.5'
     implementation 'com.mikepenz:materialdrawer:8.4.5'
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,8 +55,8 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val minute = Calendar.getInstance().get(Calendar.MINUTE)
-            val today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
-            val date = day.split("-")[2]
+            val today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            val date = day.split("-")[2].toInt()
 
             val currentHour = hour + minute / 60f
 

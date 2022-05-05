@@ -35,7 +35,10 @@ class PaymentsFragment : Fragment() {
 
         Thread {
             val payments: List<Payment> = Utils.db?.paymentDao()!!.getAll()
-            financesTable.adapter = PaymentViewAdapter(payments)
+
+            activity?.runOnUiThread {
+                financesTable.adapter = PaymentViewAdapter(payments)
+            }
         }.start()
     }
 }

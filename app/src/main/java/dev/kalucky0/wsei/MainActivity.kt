@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var student: Student
     private lateinit var accountHeader: AccountHeaderView
 
+    private var filterMenu: MenuItem? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +56,13 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val f = destination.id
+            binding.toolbar.elevation =
+                if (f == R.id.scheduleFragment || f == R.id.profileFragment) 0f else 8f
+            filterMenu?.isVisible = f == R.id.scheduleFragment
+        }
 
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)
@@ -120,16 +131,6 @@ class MainActivity : AppCompatActivity() {
                 isIconTinted = true
                 identifier = 5
             },
-//            SectionDrawerItem().apply {
-//                nameText = "New version (v1.2.2)"
-//            },
-//            PrimaryDrawerItem().apply {
-//                nameRes = R.string.download
-//                iconRes = R.drawable.download
-//                isIconTinted = true
-//                isSelected = true
-//                identifier = 6
-//            }
         )
 
         binding.slider.onDrawerItemClickListener = { _, drawerItem, _ ->
@@ -153,8 +154,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun replaceFragment(fragment: Int, string: String) {
-        binding.toolbar.elevation =
-            if (fragment == R.id.scheduleFragment || fragment == R.id.profileFragment) 0f else 8f
         binding.title.text = string
         binding.subtitle.text = "${student.name} ${student.surname}"
         navController.navigate(fragment)
@@ -195,5 +194,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) return true
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.schedule, menu)
+        filterMenu = menu?.findItem(R.id.action_filter)
+        return true
     }
 }

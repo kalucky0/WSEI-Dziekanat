@@ -93,4 +93,5 @@
     <string name="year_of_graduation">Rok ukończenia</string>
     <string name="your_data">Twoje dane</string>
     <string name="enter_code">Wpisz kod z obrazka</string>
+    <string name="filter">Filtr</string>
 </resources>

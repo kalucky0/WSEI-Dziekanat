@@ -6,8 +6,9 @@ import kotlinx.datetime.LocalDate
 
 @Dao
 interface ScheduleDao {
-    @Query("SELECT * FROM schedule")
-    fun getAll(): List<Schedule>
+
+    @Query("SELECT * FROM schedule WHERE type IN (:types)")
+    fun getAll(types: List<String>): List<Schedule>
 
     @Query("SELECT day from schedule GROUP BY day")
     fun getAllDates(): List<LocalDate>

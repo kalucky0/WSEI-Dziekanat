@@ -23,8 +23,11 @@
     <string name="due_date">Termin</string>
     <string name="education">Wykształcenie</string>
     <string name="email">E-mail</string>
+    <string name="enter_code">Wpisz kod z obrazka</string>
+    <string name="exercises">Ćwiczenia</string>
     <string name="father_maiden_name">Nazwisko panieńskie</string>
     <string name="father_name">Imię ojca</string>
+    <string name="filter">Filtr</string>
     <string name="finances">Finanse</string>
     <string name="form">Forma zajęć</string>
     <string name="games">Gry</string>
@@ -35,7 +38,9 @@
     <string name="instructor">Prowadzący</string>
     <string name="issue_date">Data wydania</string>
     <string name="issue_on_github">Zgłoś problem na GitHub</string>
+    <string name="laboratories">Laboratoria</string>
     <string name="landline_number">Numer stacjonarny</string>
+    <string name="lectures">Wykłady</string>
     <string name="logging_out">Wylogowywanie…</string>
     <string name="login">Login</string>
     <string name="login_error">Wystąpił błąd podczas próby logowania!</string>
@@ -68,10 +73,12 @@
     <string name="schedule">Plan zajęć</string>
     <string name="school">Szkoła</string>
     <string name="second_name">Drugie imię</string>
+    <string name="seminars">Konwersatoria</string>
     <string name="series_and_number_of_identity_card">Seria i numer dowodu osobistego</string>
     <string name="settings">Ustawienia</string>
     <string name="sex">Płeć</string>
     <string name="shoot_spaceships">Strzelaj do statków kosmicznych obcych</string>
+    <string name="show">Wyświetlaj</string>
     <string name="sign_in">Zaloguj się</string>
     <string name="snake_survive">Przetrwaj tak długo, jak możesz</string>
     <string name="specialization">Specjalność</string>
@@ -92,6 +99,4 @@
     <string name="work_experience">Doświadczenie zawodowe</string>
     <string name="year_of_graduation">Rok ukończenia</string>
     <string name="your_data">Twoje dane</string>
-    <string name="enter_code">Wpisz kod z obrazka</string>
-    <string name="filter">Filtr</string>
 </resources>

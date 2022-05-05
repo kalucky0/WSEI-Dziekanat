@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="4dp"
+    tools:context=".ui.schedule.ScheduleFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <CheckBox
+            android:id="@+id/checkbox_lectures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lectures" />
+
+        <CheckBox
+            android:id="@+id/checkbox_seminars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seminars" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/checkbox_labs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/laboratories" />
+
+        <CheckBox
+            android:id="@+id/checkbox_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exercises" />
+
+    </LinearLayout>
+
+</LinearLayout>

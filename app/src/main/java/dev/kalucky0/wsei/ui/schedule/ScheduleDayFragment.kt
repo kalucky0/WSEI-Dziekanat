@@ -49,6 +49,8 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
     }
 
     private fun setupSchedule(activities: List<Schedule>) {
+        if (activities.isEmpty()) return
+
         startHour = max(floor(activities[0].timeFrom).roundToInt() - 2, 8)
         endHour = min(ceil(activities.last().timeTo).roundToInt() + 2, 24)
 
@@ -61,13 +63,10 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
             val currentHour = hour + minute / 60f
 
             if (currentHour > startHour && currentHour < endHour && today == date) {
+                timeIndicator.alpha = 1f
                 timeIndicator.translationY =
                     toPixels(79f, context) * (currentHour - startHour) + toPixels(9f, context)
-            } else {
-                timeIndicator.alpha = 0f
             }
-        } else {
-            timeIndicator.alpha = 0f
         }
 
         val hours: ArrayList<String> = ArrayList()

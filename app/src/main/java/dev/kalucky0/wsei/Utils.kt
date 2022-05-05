@@ -10,6 +10,7 @@ class Utils {
     companion object {
         var db: AppDatabase? = null
         var sessionId: String = ""
+        var filterTypes = arrayListOf("Wyk", "Konw", "Lab", "Cw")
         lateinit var downloaderClient: OkHttpClient
         lateinit var student: Student
 

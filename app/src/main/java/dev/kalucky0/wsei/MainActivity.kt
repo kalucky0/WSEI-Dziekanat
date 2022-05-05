@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -22,6 +21,7 @@ import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.models.Student
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
+import dev.kalucky0.wsei.ui.schedule.FilterDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -192,8 +192,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) return true
-        return super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.action_filter -> FilterDialog().show(supportFragmentManager, "filter")
+            else -> super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

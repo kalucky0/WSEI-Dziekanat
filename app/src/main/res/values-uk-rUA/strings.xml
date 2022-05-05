@@ -23,8 +23,11 @@
     <string name="due_date">Термін</string>
     <string name="education">Освіта</string>
     <string name="email">Електронна пошта</string>
+    <string name="enter_code">Введіть код</string>
+    <string name="exercises">Вправи</string>
     <string name="father_maiden_name">Дівоче прізвище</string>
     <string name="father_name">Ім\'я по батькові</string>
+    <string name="filter">Фільтр</string>
     <string name="finances">Фінанси</string>
     <string name="form">Форма навчання</string>
     <string name="games">Ігри</string>
@@ -35,7 +38,9 @@
     <string name="instructor">Викладач</string>
     <string name="issue_date">Дата випуску</string>
     <string name="issue_on_github">Повідомити проблему на GitHub</string>
+    <string name="laboratories">Лабораторії</string>
     <string name="landline_number">Номер стаціонарного телефону</string>
+    <string name="lectures">Лекції</string>
     <string name="logging_out">Вихід…</string>
     <string name="login">Увійти</string>
     <string name="login_error">Під час спроби входу сталася помилка!</string>
@@ -67,6 +72,7 @@
     <string name="schedule">Розклад уроків</string>
     <string name="school">Школа</string>
     <string name="second_name">Друге ім\'я</string>
+    <string name="seminars">Семінари</string>
     <string name="series_and_number_of_identity_card">Серія та номер посвідчення особи</string>
     <string name="settings">Налаштування</string>
     <string name="sex">Стать</string>
@@ -90,6 +96,4 @@
     <string name="work_experience">Досвід</string>
     <string name="year_of_graduation">Рік закінчення</string>
     <string name="your_data">Ваші дані</string>
-    <string name="enter_code">Введіть код</string>
-    <string name="filter">Фільтр</string>
 </resources>

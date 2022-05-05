@@ -34,5 +34,42 @@ class Utils {
             val scale: Float = context!!.resources.displayMetrics.density
             return (dp * scale + 0.5f).toInt()
         }
+
+        fun setFilters(
+            showLectures: Boolean,
+            showSeminars: Boolean,
+            showExercises: Boolean,
+            showLabs: Boolean,
+            context: Context
+        ) {
+            filterTypes.clear()
+            if (showLectures) filterTypes.add("Wyk")
+            if (showSeminars) filterTypes.add("Konw")
+            if (showExercises) filterTypes.add("Lab")
+            if (showLabs) filterTypes.add("Cw")
+
+            val sharedPref = context.getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putBoolean("showLectures", showLectures)
+            editor.putBoolean("showSeminars", showSeminars)
+            editor.putBoolean("showExercises", showExercises)
+            editor.putBoolean("showLabs", showLabs)
+            editor.apply()
+        }
+
+        fun loadFilters(context: Context) {
+            val sharedPref = context.getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
+
+            val showLectures = sharedPref.getBoolean("showLectures", true)
+            val showSeminars = sharedPref.getBoolean("showSeminars", true)
+            val showExercises = sharedPref.getBoolean("showExercises", true)
+            val showLabs = sharedPref.getBoolean("showLabs", true)
+
+            filterTypes.clear()
+            if (showLectures) filterTypes.add("Wyk")
+            if (showSeminars) filterTypes.add("Konw")
+            if (showExercises) filterTypes.add("Lab")
+            if (showLabs) filterTypes.add("Cw")
+        }
     }
 }

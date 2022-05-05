@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             filterMenu?.isVisible = f == R.id.scheduleFragment
         }
 
+        Utils.loadFilters(this)
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)
 

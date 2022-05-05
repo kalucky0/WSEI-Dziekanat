@@ -20,16 +20,18 @@ class FilterDialog : DialogFragment() {
             b.checkboxExercises.isChecked = Utils.filterTypes.contains("Cw")
             b.checkboxLabs.isChecked = Utils.filterTypes.contains("Lab")
 
-            builder.setMessage(getString(R.string.show))
+            builder.setTitle(getString(R.string.show))
                 .setView(b.root)
                 .setPositiveButton(
                     android.R.string.ok
                 ) { _, _ ->
-                    Utils.filterTypes.clear()
-                    if (b.checkboxLectures.isChecked) Utils.filterTypes.add("Wyk")
-                    if (b.checkboxSeminars.isChecked) Utils.filterTypes.add("Konw")
-                    if (b.checkboxExercises.isChecked) Utils.filterTypes.add("Cw")
-                    if (b.checkboxLabs.isChecked) Utils.filterTypes.add("Lab")
+                    Utils.setFilters(
+                        b.checkboxLectures.isChecked,
+                        b.checkboxSeminars.isChecked,
+                        b.checkboxExercises.isChecked,
+                        b.checkboxLabs.isChecked,
+                        it
+                    )
                     it.supportFragmentManager.beginTransaction().replace(
                         R.id.nav_host_fragment,
                         ScheduleFragment()

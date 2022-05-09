@@ -17,6 +17,17 @@ import kotlin.math.*
 
 class ScheduleDayFragment(private val schedule: List<Schedule>, private val day: String) :
     Fragment() {
+
+    private var startHour: Int = 8
+    private var endHour: Int = 24
+    private lateinit var hoursView: RecyclerView
+    private lateinit var activitiesView: RecyclerView
+    private lateinit var timeIndicator: View
+
+    constructor() : this(listOf(), "") {
+        // Required empty public constructor
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,12 +35,6 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
     ): View {
         return inflater.inflate(R.layout.fragment_schedule_day, container, false)
     }
-
-    private var startHour: Int = 8
-    private var endHour: Int = 24
-    private lateinit var hoursView: RecyclerView
-    private lateinit var activitiesView: RecyclerView
-    private lateinit var timeIndicator: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 

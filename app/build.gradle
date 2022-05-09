@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -11,8 +13,8 @@ android {
         applicationId 'dev.kalucky0.wsei'
         minSdk 23
         targetSdk 32
-        versionCode 9
-        versionName '1.4.0'
+        versionCode 10
+        versionName '1.4.1'
         resConfigs 'pl', 'en', 'ua'
     }
 
@@ -58,11 +60,14 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'com.google.android.material:material:1.5.0'
 
+    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+
     implementation 'com.mikepenz:materialdrawer-nav:8.4.5'
     implementation 'com.mikepenz:materialdrawer:8.4.5'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.3.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.3.3'
     implementation 'org.jsoup:jsoup:1.14.3'
 
     kapt 'androidx.room:room-compiler:2.4.2'

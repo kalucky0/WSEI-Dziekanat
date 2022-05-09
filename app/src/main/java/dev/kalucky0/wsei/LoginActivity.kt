@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
@@ -67,25 +68,34 @@ class LoginActivity : AppCompatActivity() {
             URLEncoder.encode(binding?.passwordField!!.editText?.text.toString(), "utf-8")
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
         Thread {
-            val test = auth.tryLogin(login, password, formFields)
-            if (test!!.contains("/Konto/Zdjecie/")) {
-                Utils.db!!.credentialsDao().insertAll(
-                    Credentials(
-                        0,
-                        login,
-                        password
+            try {
+                val test = auth.tryLogin(login, password, formFields) ?: "/Konto/Zdjecie/"
+                if (test.contains("/Konto/Zdjecie/")) {
+                    Utils.db!!.credentialsDao().insertAll(
+                        Credentials(
+                            0,
+                            login,
+                            password
+                        )
                     )
-                )
-                SynchronizeData {
-                    with(sharedPref.edit()) {
-                        putString("sessionId", Utils.sessionId)
-                        apply()
-                    }
+                    SynchronizeData {
+                        with(sharedPref.edit()) {
+                            putString("sessionId", Utils.sessionId)
+                            apply()
+                        }
 
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
+                    }
+                } else {
+                    Snackbar.make(
+                        binding!!.root,
+                        getString(R.string.login_error),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
-            } else {
+            } catch (e: IOException) {
+                FirebaseCrashlytics.getInstance().recordException(e)
                 Snackbar.make(
                     binding!!.root,
                     getString(R.string.login_error),

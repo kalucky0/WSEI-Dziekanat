@@ -1,5 +1,6 @@
 package dev.kalucky0.wsei.data
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +19,8 @@ class Authentication(val context: Context) {
     private var captchaCode: String = ""
 
     fun solveCaptcha() {
+        if ((context as Activity).isFinishing) return
+
         Utils.initHttpClient()
         val dialogBinding: DialogCaptchaBinding =
             DialogCaptchaBinding.inflate(LayoutInflater.from(context))
@@ -60,7 +63,7 @@ class Authentication(val context: Context) {
             .addHeader("Content-Type", "application/x-www-form-urlencoded")
             .build()
         client.newCall(request).execute().use { response ->
-            return response.body()!!.string()
+            return response.body()?.string()
         }
     }
 

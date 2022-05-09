@@ -122,8 +122,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             )
             val matches = data?.let { regex.findAll(it) }
             val formFields = matches?.map { it.groupValues[2] }?.filter { it != "2442" }!!.toList()
-            val test = auth.tryLogin(cred.login, cred.password, formFields)
-            if (test!!.contains("/Konto/Zdjecie/")) {
+            val test = auth.tryLogin(cred.login, cred.password, formFields) ?: "/Konto/Zdjecie/"
+            if (test.contains("/Konto/Zdjecie/")) {
                 SynchronizeData {
                     with(sharedPref!!.edit()) {
                         putString("sessionId", Utils.sessionId)
@@ -133,7 +133,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     requireActivity().runOnUiThread {
                         Snackbar.make(
                             requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.sync_success),
+                            getString(if(it) R.string.sync_success else R.string.sync_error),
                             Snackbar.LENGTH_LONG
                         ).show()
                     }

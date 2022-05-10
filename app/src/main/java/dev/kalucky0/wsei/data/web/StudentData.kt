@@ -4,6 +4,7 @@ import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.models.Student
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
 
 class StudentData {
     companion object {
@@ -37,56 +38,68 @@ class StudentData {
 
             return Student(
                 0,
-                personalData[1].`val`(),
-                personalData[2].`val`(),
-                personalData[0].`val`(),
+                getValue(personalData, 1),
+                getValue(personalData, 2),
+                getValue(personalData, 0),
                 index.split("szary\">")[1].split("<")[0],
                 index.split("<br>")[2].split("<br>")[0].trim(),
-                personalData[3].`val`(),
-                generalData[11].text(),
+                getValue(personalData, 3),
+                getText(generalData, 11),
                 city,
-                personalData[5].`val`(),
-                generalData[17].text(),
+                getValue(personalData, 5),
+                getText(generalData, 17),
                 maritalStatus,
                 nationality,
                 citizenship,
-                personalData[9].`val`() + " " + personalData[10].`val`(),
-                personalData[11].`val`(),
-                personalData[12].`val`(),
-                personalData[13].`val`(),
-                personalData[14].`val`(),
-                personalData[15].`val`(),
-                personalData[16].`val`(),
-                personalData[17].`val`(),
-                personalData[18].`val`(),
-                personalData[19].`val`(),
-                addressData[1].text(),
-                addressData[2].text(),
-                addressData[3].text(),
-                addressData[4].text(),
-                addressData[5].text(),
-                addressData[6].text(),
-                addressData[7].text(),
-                addressData[9].text(),
-                addressData[10].text(),
-                addressData[11].text(),
-                addressData[12].text(),
-                addressData[13].text(),
+                getValue(personalData, 9) + " " + getValue(personalData, 10),
+                getValue(personalData, 11),
+                getValue(personalData, 12),
+                getValue(personalData, 13),
+                getValue(personalData, 14),
+                getValue(personalData, 15),
+                getValue(personalData, 16),
+                getValue(personalData, 17),
+                getValue(personalData, 18),
+                getValue(personalData, 19),
+                getText(addressData, 1),
+                getText(addressData, 2),
+                getText(addressData, 3),
+                getText(addressData, 4),
+                getText(addressData, 5),
+                getText(addressData, 6),
+                getText(addressData, 7),
+                getText(addressData, 9),
+                getText(addressData, 10),
+                getText(addressData, 11),
+                getText(addressData, 12),
+                getText(addressData, 13),
                 additional,
-                educationData[1].text(),
-                educationData[3].text(),
-                Integer.parseInt(educationData[5].text()),
-                educationData[7].text() + ",\n" + educationData[8].text() + ",\n" + educationData[9].text(),
-                educationData[11].text(),
-                educationData[13].text(),
-                educationData[15].text(),
-                educationData[17].text(),
-                educationData[19].text(),
-                educationData[21].text(),
-                educationData[23].text(),
-                educationData[25].text(),
-                educationData[27].text()
+                getText(educationData, 1),
+                getText(educationData, 3),
+                Integer.parseInt(getText(educationData, 5, "0")),
+                getText(educationData, 7) + ",\n" +
+                        getText(educationData, 8) + ",\n" +
+                        getText(educationData, 9),
+                getText(educationData, 11),
+                getText(educationData, 13),
+                getText(educationData, 15),
+                getText(educationData, 17),
+                getText(educationData, 19),
+                getText(educationData, 21),
+                getText(educationData, 23),
+                getText(educationData, 25),
+                getText(educationData, 27)
             )
+        }
+
+        private fun getText(arr: Elements, i: Int, def: String = "-"): String {
+            if (arr.size <= i) return def
+            return arr[i].text()
+        }
+
+        private fun getValue(arr: Elements, i: Int): String {
+            if (arr.size <= i) return "-"
+            return arr[i].`val`()
         }
 
         private fun selectVal(doc: Document, id: String): String {

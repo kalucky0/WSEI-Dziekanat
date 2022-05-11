@@ -87,6 +87,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        versionLabel?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            Toast.makeText(
+                context,
+                "APPLICATION_ID: " + BuildConfig.APPLICATION_ID + "\nBUILD_TYPE: " + BuildConfig.BUILD_TYPE + "\nVERSION_NAME: " + BuildConfig.VERSION_NAME + "\nVERSION_CODE: " + BuildConfig.VERSION_CODE,
+                Toast.LENGTH_LONG
+            ).show()
+            true
+        }
+
         versionLabel?.summary = "v${BuildConfig.VERSION_NAME} [${BuildConfig.VERSION_CODE}]"
 
         logoutButton?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
@@ -130,21 +139,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         apply()
                     }
 
-                    requireActivity().runOnUiThread {
-                        Snackbar.make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(if(it) R.string.sync_success else R.string.sync_error),
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                    activity?.runOnUiThread {
+                        if (activity != null)
+                            Snackbar.make(
+                                requireActivity().findViewById(android.R.id.content),
+                                getString(if (it) R.string.sync_success else R.string.sync_error),
+                                Snackbar.LENGTH_LONG
+                            ).show()
                     }
                 }
             } else {
-                requireActivity().runOnUiThread {
-                    Snackbar.make(
-                        requireActivity().findViewById(android.R.id.content),
-                        getString(R.string.sync_error),
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                activity?.runOnUiThread {
+                    if (activity != null)
+                        Snackbar.make(
+                            requireActivity().findViewById(android.R.id.content),
+                            getString(R.string.sync_error),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                 }
             }
         } catch (e: IOException) {

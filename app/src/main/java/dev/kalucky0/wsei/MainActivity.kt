@@ -1,9 +1,11 @@
 package dev.kalucky0.wsei
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
@@ -22,6 +25,7 @@ import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.models.Student
 import dev.kalucky0.wsei.databinding.ActivityMainBinding
 import dev.kalucky0.wsei.ui.schedule.FilterDialog
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         Utils.initHttpClient()
         setupDrawer(savedInstanceState)
 
+        checkForNewVersion()
+
         if (Utils.db == null)
             Utils.db = Room.databaseBuilder(
                 applicationContext,
@@ -83,6 +89,38 @@ class MainActivity : AppCompatActivity() {
                 logout()
             }
         }.start()
+    }
+
+    private fun checkForNewVersion() {
+        Thread {
+            try {
+                val latestVersion = URL("https://cdn.kalucky0.dev/wsei/version.txt").readText()
+                if (latestVersion != BuildConfig.VERSION_CODE.toString()) {
+                    runOnUiThread {
+                        binding.slider.itemAdapter.add(
+                            DividerDrawerItem(),
+                            PrimaryDrawerItem().apply {
+                                nameRes = R.string.new_version
+                                iconRes = R.drawable.download
+                                isIconTinted = true
+                                isSelected = true
+                                identifier = 7
+                            },
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                FirebaseCrashlytics.getInstance().recordException(e)
+            }
+        }.start()
+    }
+
+    private fun openStore() {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -131,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                 iconRes = R.drawable.cog
                 isIconTinted = true
                 identifier = 5
-            },
+            }
         )
 
         binding.slider.onDrawerItemClickListener = { _, drawerItem, _ ->
@@ -141,6 +179,7 @@ class MainActivity : AppCompatActivity() {
                 3L -> replaceFragment(R.id.announcementsFragment, getString(R.string.announcements))
                 4L -> replaceFragment(R.id.profileFragment, getString(R.string.your_data))
                 5L -> replaceFragment(R.id.settingsFragment, getString(R.string.settings))
+                7L -> openStore()
             }
             false
         }

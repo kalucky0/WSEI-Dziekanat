@@ -103,4 +103,5 @@
     <string name="year_of_graduation">Year of graduation</string>
     <string name="your_data">Your data</string>
     <string name="grades">Grades</string>
+    <string name="new_version">New version available</string>
 </resources>

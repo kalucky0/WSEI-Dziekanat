@@ -13,8 +13,8 @@ android {
         applicationId 'dev.kalucky0.wsei'
         minSdk 23
         targetSdk 32
-        versionCode 10
-        versionName '1.4.1'
+        versionCode 12
+        versionName '1.4.3'
         resConfigs 'pl', 'en', 'ua'
     }
 
@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.3.3'
     implementation 'org.jsoup:jsoup:1.14.3'
+
+    testImplementation 'junit:junit:4.13.2'
 
     kapt 'androidx.room:room-compiler:2.4.2'
 }

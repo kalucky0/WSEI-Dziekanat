@@ -9,8 +9,8 @@ interface AnnouncementDao {
     fun getAll(): List<Announcement>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg users: Announcement)
+    fun insertAll(vararg announcements: Announcement)
 
     @Delete
-    fun delete(user: Announcement)
+    fun delete(announcement: Announcement)
 }

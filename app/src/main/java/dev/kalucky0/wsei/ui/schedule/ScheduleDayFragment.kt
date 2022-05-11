@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -77,8 +76,9 @@ class ScheduleDayFragment(private val schedule: List<Schedule>, private val day:
         val hours: ArrayList<String> = ArrayList()
         for (i in startHour..endHour) hours.add("$i:00")
 
-        hoursView.layoutParams.height = toPixels(80f, context) * (endHour - startHour)
-        activitiesView.layoutParams.height = toPixels(80f, context) * (endHour - startHour)
+        val height = toPixels(80f, context) * (endHour - startHour) + toPixels(40f, context)
+        hoursView.layoutParams.height = height
+        activitiesView.layoutParams.height = height
 
         hoursView.adapter = ScheduleHoursAdapter(hours)
         activitiesView.adapter = ScheduleActivitiesAdapter(activities, startHour)

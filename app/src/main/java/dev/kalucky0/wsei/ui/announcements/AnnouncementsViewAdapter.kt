@@ -1,5 +1,6 @@
 package dev.kalucky0.wsei.ui.announcements
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -40,6 +41,9 @@ class AnnouncementsViewAdapter(
         holder.contentView.text = item.title
         holder.dateView.text = item.date
         holder.priorityView.text = item.priority
+
+        if(!item.isRead)
+            holder.contentView.setTypeface(null, Typeface.BOLD)
     }
 
     override fun getItemCount(): Int = values.size

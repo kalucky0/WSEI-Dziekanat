@@ -1,14 +1,16 @@
 package dev.kalucky0.wsei.ui.announcements
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.kalucky0.wsei.R
+import dev.kalucky0.wsei.Utils
+import dev.kalucky0.wsei.data.models.Announcement
 
 class AnnouncementsFragment : Fragment() {
 
@@ -30,6 +32,14 @@ class AnnouncementsFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        announcementsTable.adapter = AnnouncementsViewAdapter(emptyList())
+
+        Thread {
+            var announcements: List<Announcement> = Utils.db?.announcementDao()!!.getAll()
+            announcements = announcements.sortedBy { it.date }.reversed()
+
+            activity?.runOnUiThread {
+                announcementsTable.adapter = AnnouncementsViewAdapter(announcements)
+            }
+        }.start()
     }
 }

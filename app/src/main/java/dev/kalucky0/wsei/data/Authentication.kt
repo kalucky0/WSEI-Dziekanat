@@ -16,7 +16,7 @@ import okhttp3.RequestBody
 import java.io.IOException
 
 class Authentication(val context: Context) {
-    private var captchaCode: String = ""
+    var captchaCode: String = ""
 
     fun solveCaptcha() {
         if ((context as Activity).isFinishing) return
@@ -26,6 +26,7 @@ class Authentication(val context: Context) {
             DialogCaptchaBinding.inflate(LayoutInflater.from(context))
         AlertDialog.Builder(context)
             .setTitle(context.getString(R.string.enter_code))
+            .setCancelable(false)
             .setView(dialogBinding.root)
             .setPositiveButton("Ok") { _, _ ->
                 captchaCode = dialogBinding.passwordField.editText?.text.toString()

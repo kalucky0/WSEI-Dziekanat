@@ -19,53 +19,64 @@ import java.net.URLEncoder
 
 class LoginActivity : AppCompatActivity() {
 
-    private var binding: ActivityLoginBinding? = null
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: Authentication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        setContentView(binding.root)
 
         auth = Authentication(this)
 
-        if (Utils.db == null)
+        if (Utils.db == null) {
             Utils.db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "wsei-db"
             ).fallbackToDestructiveMigration().build()
+        }
 
         var formFields: List<String> = ArrayList()
 
         Thread {
             try {
-                val data = auth.getData("https://dziekanat.wsei.edu.pl/Konto/LogowanieStudenta")
-
-                runOnUiThread {
-                    if (data!!.contains("wpisz kod z obrazka")) auth.solveCaptcha()
-                }
-                val regex = Regex(
-                    "<tr style=\"(.*?)\">.+?formularz_dane\">\\s+<input.+?name=\"([0-9A-f]+)\".+?type=\"([a-z]+)\"",
-                    setOf(
-                        RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL
-                    )
-                )
-                val matches = data?.let { regex.findAll(it) }
-                formFields = matches?.map { it.groupValues[2] }?.filter { it != "2442" }!!.toList()
-                runOnUiThread { binding?.loginButton!!.isEnabled = true }
+                formFields = getFormFields()
+                runOnUiThread { binding.loginButton.isEnabled = true }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         }.start()
 
         val sharedPref = getSharedPreferences("wsei-app", Context.MODE_PRIVATE)
-        binding?.loginButton!!.setOnClickListener { authenticate(sharedPref, formFields) }
+        binding.loginButton.setOnClickListener { authenticate(sharedPref, formFields) }
+    }
+
+    private fun getFormFields(): List<String> {
+        val data = auth.getData("https://dziekanat.wsei.edu.pl/Konto/LogowanieStudenta") ?: ""
+
+        if (data.isNotEmpty()) {
+            if (data.contains("wpisz kod z obrazka")) {
+                runOnUiThread {
+                    auth.solveCaptcha()
+                }
+            }
+            val regex = Regex(
+                "<tr style=\"(.*?)\">.+?formularz_dane\">\\s+<input.+?name=\"([0-9A-f]+)\".+?type=\"([a-z]+)\"",
+                setOf(
+                    RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL
+                )
+            )
+            val matches = data.let { regex.findAll(it) }
+            return matches.map { it.groupValues[2] }.filter { it != "2442" }.toList()
+        }
+        return emptyList()
     }
 
     private fun authenticate(sharedPref: SharedPreferences, formFields: List<String>) {
-        val login = URLEncoder.encode(binding?.loginField!!.editText?.text.toString(), "utf-8")
+        val login = URLEncoder.encode(binding.loginField.editText?.text.toString(), "utf-8")
         val password =
-            URLEncoder.encode(binding?.passwordField!!.editText?.text.toString(), "utf-8")
+            URLEncoder.encode(binding.passwordField.editText?.text.toString(), "utf-8")
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
         Thread {
             try {
@@ -89,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 } else {
                     Snackbar.make(
-                        binding!!.root,
+                        binding.root,
                         getString(R.string.login_error),
                         Snackbar.LENGTH_LONG
                     ).show()
@@ -97,12 +108,11 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 FirebaseCrashlytics.getInstance().recordException(e)
                 Snackbar.make(
-                    binding!!.root,
+                    binding.root,
                     getString(R.string.login_error),
                     Snackbar.LENGTH_LONG
                 ).show()
             }
         }.start()
     }
-
 }

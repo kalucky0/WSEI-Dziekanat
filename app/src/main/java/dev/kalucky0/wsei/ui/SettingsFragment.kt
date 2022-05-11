@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dev.kalucky0.wsei.BuildConfig
 import dev.kalucky0.wsei.LoginActivity
 import dev.kalucky0.wsei.R
@@ -18,7 +19,6 @@ import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
 import dev.kalucky0.wsei.data.models.Credentials
 import java.io.IOException
-
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var auth: Authentication
@@ -116,21 +116,38 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    private fun showSyncError() {
+        activity?.runOnUiThread {
+            Snackbar.make(
+                requireActivity().findViewById(android.R.id.content),
+                getString(R.string.sync_error),
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+    }
+
     private fun synchronizeData(cred: Credentials, sharedPref: SharedPreferences?) {
         try {
-            val data = auth.getData("https://dziekanat.wsei.edu.pl/Konto/LogowanieStudenta")
+            val data = auth.getData("https://dziekanat.wsei.edu.pl/Konto/LogowanieStudenta") ?: ""
 
-            activity?.runOnUiThread {
-                if (data!!.contains("wpisz kod z obrazka")) auth.solveCaptcha()
+            if (data.isEmpty()) showSyncError()
+
+            if (data.contains("wpisz kod z obrazka")) {
+                activity?.runOnUiThread {
+                    auth.solveCaptcha()
+                }
+
+                while (auth.captchaCode.isEmpty()) Thread.sleep(100)
             }
+
             val regex = Regex(
                 "<tr style=\"(.*?)\">.+?formularz_dane\">\\s+<input.+?name=\"([0-9A-f]+)\".+?type=\"([a-z]+)\"",
                 setOf(
                     RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL
                 )
             )
-            val matches = data?.let { regex.findAll(it) }
-            val formFields = matches?.map { it.groupValues[2] }?.filter { it != "2442" }!!.toList()
+            val matches = data.let { regex.findAll(it) }
+            val formFields = matches.map { it.groupValues[2] }.filter { it != "2442" }.toList()
             val test = auth.tryLogin(cred.login, cred.password, formFields) ?: "/Konto/Zdjecie/"
             if (test.contains("/Konto/Zdjecie/")) {
                 SynchronizeData {
@@ -149,17 +166,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     }
                 }
             } else {
-                activity?.runOnUiThread {
-                    if (activity != null)
-                        Snackbar.make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.sync_error),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                }
+                showSyncError()
             }
         } catch (e: IOException) {
             e.printStackTrace()
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
 }

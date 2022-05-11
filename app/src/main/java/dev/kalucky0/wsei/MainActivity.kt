@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                FirebaseCrashlytics.getInstance().recordException(e)
+                Firebase.crashlytics.recordException(e)
             }
         }.start()
     }
@@ -145,6 +146,12 @@ class MainActivity : AppCompatActivity() {
                 isSelected = true
                 identifier = 1
             },
+//            PrimaryDrawerItem().apply {
+//                nameRes = R.string.grades
+//                iconRes = R.drawable.notebook_outline
+//                isIconTinted = true
+//                identifier = 6
+//            },
             PrimaryDrawerItem().apply {
                 nameRes = R.string.finances
                 iconRes = R.drawable.currency_usd

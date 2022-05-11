@@ -8,7 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import dev.kalucky0.wsei.data.AppDatabase
 import dev.kalucky0.wsei.data.Authentication
 import dev.kalucky0.wsei.data.SynchronizeData
@@ -106,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                 }
             } catch (e: IOException) {
-                FirebaseCrashlytics.getInstance().recordException(e)
+                Firebase.crashlytics.recordException(e)
                 Snackbar.make(
                     binding.root,
                     getString(R.string.login_error),

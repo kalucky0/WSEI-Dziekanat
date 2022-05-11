@@ -10,7 +10,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import dev.kalucky0.wsei.BuildConfig
 import dev.kalucky0.wsei.LoginActivity
 import dev.kalucky0.wsei.R
@@ -170,7 +171,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         } catch (e: IOException) {
             e.printStackTrace()
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
         }
     }
 }

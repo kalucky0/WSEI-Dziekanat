@@ -60,9 +60,10 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'com.google.android.material:material:1.6.0'
 
-    implementation platform('com.google.firebase:firebase-bom:29.3.1')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation platform('com.google.firebase:firebase-bom:30.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-installations-ktx'
 
     implementation 'com.mikepenz:materialdrawer-nav:8.4.5'
     implementation 'com.mikepenz:materialdrawer:8.4.5'

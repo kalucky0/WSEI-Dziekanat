@@ -1,6 +1,7 @@
 package dev.kalucky0.wsei.data
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import dev.kalucky0.wsei.Utils
 import dev.kalucky0.wsei.data.web.AnnouncementsData
 import dev.kalucky0.wsei.data.web.PaymentsData
@@ -18,7 +19,7 @@ class SynchronizeData(callback: (s: Boolean) -> Unit) {
             Utils.db!!.studentDao().insertAll(student)
             return true
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
         }
         return false
     }
@@ -32,7 +33,7 @@ class SynchronizeData(callback: (s: Boolean) -> Unit) {
                 Utils.db!!.scheduleDao().insertAll(item)
             return true
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
         }
         return false
     }
@@ -44,7 +45,7 @@ class SynchronizeData(callback: (s: Boolean) -> Unit) {
                 Utils.db!!.paymentDao().insertAll(item)
             return true
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
         }
         return false
     }
@@ -56,7 +57,7 @@ class SynchronizeData(callback: (s: Boolean) -> Unit) {
                 Utils.db!!.announcementDao().insertAll(item)
             return true
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+            Firebase.crashlytics.recordException(e)
         }
         return false
     }

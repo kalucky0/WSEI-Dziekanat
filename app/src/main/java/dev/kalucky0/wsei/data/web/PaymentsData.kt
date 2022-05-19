@@ -26,8 +26,8 @@ class PaymentsData {
                         data[3],
                         data[4].split(" ")[0].toInt(),
                         data[5].split(" ")[0].toInt(),
-                        LocalDate.parse(data[7].ifBlank { "1970-01-01" }),
-                        data[8]
+                        LocalDate.parse(data[6].ifBlank { "1970-01-01" }),
+                        data[7]
                     )
                 )
             }

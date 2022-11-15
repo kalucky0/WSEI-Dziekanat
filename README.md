@@ -6,6 +6,8 @@
 ![GitHub issues](https://img.shields.io/github/issues-raw/kalucky0/WSEI-Dziekanat)
 ![GitHub](https://img.shields.io/github/license/kalucky0/WSEI-Dziekanat)
 
+### New app made using Flutter: [kalucky0/wsei_dziekanat](https://github.com/kalucky0/wsei_dziekanat)
+
 An application for Android devices that facilitates the use of the virtual dean's office of the College of Economics and Computer Science in Cracow
 
 ## Contributing
